@@ -6,14 +6,18 @@ const defaults = {
   brickColor: '#8f755c',
   brickSolidColor: '#836b58',
   brickBlend: 0,
+  brickPosX: 0,
+  brickPosY: 0,
   marbleColor: '#ffffff',
   marbleSolidColor: '#f1f1f1',
   marbleBlend: 0,
+  marblePosX: 0,
+  marblePosY: 0,
   pinColor: '#4f4f4f',
   markerColor: '#4f4f4f',
   pillColor: '#595959',
   pillTextColor: '#ffffff',
-  relationCharacterColor: '#ffffff',
+  relationCharacterColor: '#cfcfcf',
   checkColor: '#555555',
   lineColor: '#8a8a8a',
   name: '캐릭터 이름',
@@ -21,6 +25,8 @@ const defaults = {
   summary: '캐릭터의 간단한 개요 설명',
   keyword1: '키워드',
   keyword2: '키워드',
+  mainImagePosX: 0,
+  mainImagePosY: 0,
   brickImage: './assets/brick-default.png',
   marbleImage: './assets/marble-default.png',
   checklists: {
@@ -41,9 +47,13 @@ const elements = {
   marbleMode: document.getElementById('marbleMode'),
   brickColor: document.getElementById('brickColor'),
   brickSolidColor: document.getElementById('brickSolidColor'),
+  brickPosX: document.getElementById('brickPosX'),
+  brickPosY: document.getElementById('brickPosY'),
   brickBlend: document.getElementById('brickBlend'),
   marbleColor: document.getElementById('marbleColor'),
   marbleSolidColor: document.getElementById('marbleSolidColor'),
+  marblePosX: document.getElementById('marblePosX'),
+  marblePosY: document.getElementById('marblePosY'),
   marbleBlend: document.getElementById('marbleBlend'),
   pinColor: document.getElementById('pinColor'),
   markerColor: document.getElementById('markerColor'),
@@ -55,6 +65,8 @@ const elements = {
   brickUpload: document.getElementById('brickUpload'),
   marbleUpload: document.getElementById('marbleUpload'),
   mainImageInput: document.getElementById('mainImageInput'),
+  mainImagePosX: document.getElementById('mainImagePosX'),
+  mainImagePosY: document.getElementById('mainImagePosY'),
   subImageInput: document.getElementById('subImageInput'),
   nameInput: document.getElementById('nameInput'),
   engNameInput: document.getElementById('engNameInput'),
@@ -67,6 +79,7 @@ const elements = {
   previewSummary: document.getElementById('previewSummary'),
   previewKeyword1: document.getElementById('previewKeyword1'),
   previewKeyword2: document.getElementById('previewKeyword2'),
+  relationLinkedName: document.getElementById('relationLinkedName'),
   mainPortrait: document.getElementById('mainPortrait'),
   subPortrait: document.getElementById('subPortrait'),
   downloadPngBtn: document.getElementById('downloadPngBtn'),
@@ -93,6 +106,7 @@ function setMode(target, mode, type) {
 function syncTextInputs() {
   elements.previewName.textContent = elements.nameInput.value || defaults.name;
   elements.folderTitle.textContent = elements.nameInput.value || defaults.name;
+  elements.relationLinkedName.textContent = elements.nameInput.value || defaults.name;
   elements.previewEngName.textContent = elements.engNameInput.value || defaults.engName;
   elements.previewSummary.textContent = elements.summaryInput.value || defaults.summary;
   elements.previewKeyword1.textContent = elements.keyword1Input.value || defaults.keyword1;
@@ -103,6 +117,7 @@ function syncInputsFromEditable() {
   const syncedName = elements.previewName.textContent.trim();
   elements.nameInput.value = syncedName;
   elements.folderTitle.textContent = syncedName;
+  elements.relationLinkedName.textContent = syncedName;
   elements.engNameInput.value = elements.previewEngName.textContent.trim();
   elements.summaryInput.value = elements.previewSummary.textContent.trim();
   elements.keyword1Input.value = elements.previewKeyword1.textContent.trim();
@@ -113,9 +128,13 @@ function updateTheme() {
   root.style.setProperty('--brick-color', elements.brickColor.value);
   root.style.setProperty('--brick-solid-color', elements.brickSolidColor.value);
   root.style.setProperty('--brick-blend-alpha', String(Number(elements.brickBlend.value) / 100));
+  root.style.setProperty('--brick-pos-x', `${elements.brickPosX.value}px`);
+  root.style.setProperty('--brick-pos-y', `${elements.brickPosY.value}px`);
   root.style.setProperty('--marble-color', elements.marbleColor.value);
   root.style.setProperty('--marble-solid-color', elements.marbleSolidColor.value);
   root.style.setProperty('--marble-blend-alpha', String(Number(elements.marbleBlend.value) / 100));
+  root.style.setProperty('--marble-pos-x', `${elements.marblePosX.value}px`);
+  root.style.setProperty('--marble-pos-y', `${elements.marblePosY.value}px`);
   root.style.setProperty('--pin-color', elements.pinColor.value);
   root.style.setProperty('--marker-color', elements.markerColor.value);
   root.style.setProperty('--pill-color', elements.pillColor.value);
@@ -123,6 +142,8 @@ function updateTheme() {
   root.style.setProperty('--relation-character-color', elements.relationCharacterColor.value);
   root.style.setProperty('--check-color', elements.checkColor.value);
   root.style.setProperty('--line-color', elements.lineColor.value);
+  root.style.setProperty('--main-image-pos-x', `${elements.mainImagePosX.value}px`);
+  root.style.setProperty('--main-image-pos-y', `${elements.mainImagePosY.value}px`);
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
@@ -164,6 +185,7 @@ function bindEditableSync() {
   elements.folderTitle.addEventListener('input', () => {
     const syncedName = elements.folderTitle.textContent.trim() || defaults.name;
     elements.previewName.textContent = syncedName;
+    elements.relationLinkedName.textContent = syncedName;
     elements.nameInput.value = syncedName;
   });
 }
@@ -232,9 +254,13 @@ function resetAll() {
   elements.marbleMode.value = defaults.marbleMode;
   elements.brickColor.value = defaults.brickColor;
   elements.brickSolidColor.value = defaults.brickSolidColor;
+  elements.brickPosX.value = defaults.brickPosX;
+  elements.brickPosY.value = defaults.brickPosY;
   elements.brickBlend.value = defaults.brickBlend;
   elements.marbleColor.value = defaults.marbleColor;
   elements.marbleSolidColor.value = defaults.marbleSolidColor;
+  elements.marblePosX.value = defaults.marblePosX;
+  elements.marblePosY.value = defaults.marblePosY;
   elements.marbleBlend.value = defaults.marbleBlend;
   elements.pinColor.value = defaults.pinColor;
   elements.markerColor.value = defaults.markerColor;
@@ -248,6 +274,8 @@ function resetAll() {
   elements.summaryInput.value = defaults.summary;
   elements.keyword1Input.value = defaults.keyword1;
   elements.keyword2Input.value = defaults.keyword2;
+  elements.mainImagePosX.value = defaults.mainImagePosX;
+  elements.mainImagePosY.value = defaults.mainImagePosY;
   brickImageData = defaults.brickImage;
   marbleImageData = defaults.marbleImage;
   syncTextInputs();
@@ -267,13 +295,19 @@ Object.entries({
   summaryInput: 'input',
   keyword1Input: 'input',
   keyword2Input: 'input',
+  mainImagePosX: 'input',
+  mainImagePosY: 'input',
   brickMode: 'change',
   marbleMode: 'change',
   brickColor: 'input',
   brickSolidColor: 'input',
+  brickPosX: 'input',
+  brickPosY: 'input',
   brickBlend: 'input',
   marbleColor: 'input',
   marbleSolidColor: 'input',
+  marblePosX: 'input',
+  marblePosY: 'input',
   marbleBlend: 'input',
   pinColor: 'input',
   markerColor: 'input',

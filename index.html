@@ -26,6 +26,12 @@
           <label>메인 프로필 이미지
             <input type="file" id="mainImageInput" accept="image/*" />
           </label>
+          <label>메인 프로필 가로 이동
+            <input type="range" id="mainImagePosX" min="-200" max="200" value="0" />
+          </label>
+          <label>메인 프로필 세로 이동
+            <input type="range" id="mainImagePosY" min="-200" max="200" value="0" />
+          </label>
           <label>관계 인물 이미지
             <input type="file" id="subImageInput" accept="image/*" />
           </label>
@@ -54,6 +60,12 @@
           <label>배경색(텍스처 없을 때)
             <input type="color" id="brickSolidColor" value="#836b58" />
           </label>
+          <label>가로 이동
+            <input type="range" id="brickPosX" min="-300" max="300" value="0" />
+          </label>
+          <label>세로 이동
+            <input type="range" id="brickPosY" min="-300" max="300" value="0" />
+          </label>
           <label>블렌드 강도
             <input type="range" id="brickBlend" min="0" max="100" value="0" />
           </label>
@@ -78,6 +90,12 @@
           <label>배경색(텍스처 없을 때)
             <input type="color" id="marbleSolidColor" value="#f1f1f1" />
           </label>
+          <label>가로 이동
+            <input type="range" id="marblePosX" min="-300" max="300" value="0" />
+          </label>
+          <label>세로 이동
+            <input type="range" id="marblePosY" min="-300" max="300" value="0" />
+          </label>
           <label>블렌드 강도
             <input type="range" id="marbleBlend" min="0" max="100" value="0" />
           </label>
@@ -101,7 +119,7 @@
             <input type="color" id="pillTextColor" value="#ffffff" />
           </label>
           <label>관계캐릭터
-            <input type="color" id="relationCharacterColor" value="#ffffff" />
+            <input type="color" id="relationCharacterColor" value="#cfcfcf" />
           </label>
           <label>체크 색상
             <input type="color" id="checkColor" value="#555555" />
@@ -170,7 +188,7 @@
             <section class="card relation-card">
               <div class="marker-icon" aria-hidden="true"></div>
               <div class="relation-copy">
-                <div class="editable relation-title" contenteditable="true">캐릭터 이름과 함께 언급되는 대표 인물은...</div>
+                <div class="relation-title"><span id="relationLinkedName" class="relation-linked-name">캐릭터 이름</span><span class="editable relation-title-tail" contenteditable="true">과 함께 언급되는 대표 인물은...</span></div>
                 <div class="editable relation-name" contenteditable="true">캐릭터 이름.</div>
                 <div class="editable relation-desc" contenteditable="true">캐릭터의 간단한 개요 설명 관계성</div>
               </div>
