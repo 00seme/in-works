@@ -183,20 +183,14 @@ async function downloadPng() {
   const originalBoxShadow = sheet.style.boxShadow;
   sheet.style.boxShadow = 'none';
   try {
-    const EXPORT_WIDTH = 1000;
-    const EXPORT_HEIGHT = 1833;
     const dataUrl = await toPng(sheet, {
       cacheBust: true,
-      pixelRatio: 1,
+      pixelRatio: 2,
       skipFonts: false,
-      canvasWidth: EXPORT_WIDTH,
-      canvasHeight: EXPORT_HEIGHT,
+      canvasWidth: sheet.scrollWidth * 2,
+      canvasHeight: sheet.scrollHeight * 2,
       width: sheet.scrollWidth,
-      height: sheet.scrollHeight,
-      style: {
-        transform: 'scale(1)',
-        transformOrigin: 'top left'
-      }
+      height: sheet.scrollHeight
     });
     const link = document.createElement('a');
     link.href = dataUrl;

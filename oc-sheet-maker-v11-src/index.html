@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[IN 작품 메이커]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="controls">
+        <div class="control-card">
+          <h1>[IN 작품 메이커]</h1>
+          <p class="muted">오른쪽 시트의 텍스트를 직접 클릭해서 수정할 수 있습니다. 체크리스트는 클릭으로 체크, 텍스트 직접 수정이 가능합니다.</p>
+          <div class="button-row">
+            <button id="downloadPngBtn" class="primary">PNG 저장</button>
+            <button id="resetBtn">기본값 복원</button>
+          </div>
+        </div>
+
+        <details class="control-card control-section" open>
+          <summary><h2>이미지</h2><span class="section-toggle">접기</span></summary>
+          <label>메인 프로필 이미지
+            <input type="file" id="mainImageInput" accept="image/*" />
+          </label>
+          <label>관계 인물 이미지
+            <input type="file" id="subImageInput" accept="image/*" />
+          </label>
+          <div class="button-row two-up">
+            <button data-clear-image="main">메인 이미지 삭제</button>
+            <button data-clear-image="sub">관계 이미지 삭제</button>
+          </div>
+        </details>
+
+        <details class="control-card control-section" open>
+          <summary><h2>배경A</h2><span class="section-toggle">접기</span></summary>
+          <label>모드
+            <select id="brickMode">
+              <option value="texture">기본 텍스처 + 색상</option>
+              <option value="upload">업로드 이미지</option>
+              <option value="solid">단색 채우기</option>
+              <option value="none">없음</option>
+            </select>
+          </label>
+          <label>벽돌 색상
+            <input type="color" id="brickColor" value="#8f755c" />
+          </label>
+          <label>업로드 이미지
+            <input type="file" id="brickUpload" accept="image/*" />
+          </label>
+          <label>배경색(텍스처 없을 때)
+            <input type="color" id="brickSolidColor" value="#836b58" />
+          </label>
+          <label>블렌드 강도
+            <input type="range" id="brickBlend" min="0" max="100" value="72" />
+          </label>
+        </details>
+
+        <details class="control-card control-section" open>
+          <summary><h2>배경 B</h2><span class="section-toggle">접기</span></summary>
+          <label>모드
+            <select id="marbleMode">
+              <option value="texture">기본 텍스처 + 색상</option>
+              <option value="upload">업로드 이미지</option>
+              <option value="solid">단색 채우기</option>
+              <option value="none">없음</option>
+            </select>
+          </label>
+          <label>대리석 색상
+            <input type="color" id="marbleColor" value="#ececec" />
+          </label>
+          <label>업로드 이미지
+            <input type="file" id="marbleUpload" accept="image/*" />
+          </label>
+          <label>배경색(텍스처 없을 때)
+            <input type="color" id="marbleSolidColor" value="#f1f1f1" />
+          </label>
+          <label>블렌드 강도
+            <input type="range" id="marbleBlend" min="0" max="100" value="28" />
+          </label>
+        </details>
+
+        <details class="control-card control-section" open>
+          <summary><h2>아이콘 / 포인트 컬러</h2><span class="section-toggle">접기</span></summary>
+          <label>압정 색상
+            <input type="color" id="pinColor" value="#4f4f4f" />
+          </label>
+          <label>느낌표 색상
+            <input type="color" id="markerColor" value="#4f4f4f" />
+          </label>
+          <label>선 색상
+            <input type="color" id="lineColor" value="#8a8a8a" />
+          </label>
+          <label>라벨 배경색
+            <input type="color" id="pillColor" value="#595959" />
+          </label>
+          <label>라벨 글자색
+            <input type="color" id="pillTextColor" value="#ffffff" />
+          </label>
+        </details>
+
+        <details class="control-card control-section" open>
+          <summary><h2>간단 입력</h2><span class="section-toggle">접기</span></summary>
+          <label>캐릭터 이름
+            <input type="text" id="nameInput" value="캐릭터 이름" />
+          </label>
+          <label>영문/별칭
+            <input type="text" id="engNameInput" value="name" />
+          </label>
+          <label>한줄 소개
+            <textarea id="summaryInput" rows="4">캐릭터의 간단한 개요 설명</textarea>
+          </label>
+          <label>키워드 1
+            <input type="text" id="keyword1Input" value="키워드" />
+          </label>
+          <label>키워드 2
+            <input type="text" id="keyword2Input" value="키워드" />
+          </label>
+        </details>
+      </aside>
+
+      <main class="preview-wrap">
+        <div class="preview-toolbar">
+          <span>미리보기</span>
+          <span class="muted small">라벨 제목·체크 항목·내용 모두 직접 수정 가능</span>
+        </div>
+
+        <div id="sheet" class="sheet marble-bg">
+          <div class="top-brick brick-bg"></div>
+          <div class="sheet-curve marble-bg"></div>
+
+          <div class="top-stack">
+            <div class="top-icons">
+              <div class="folder-icon" aria-hidden="true"></div>
+              <div class="folder-title editable" contenteditable="true">캐릭터 이름</div>
+            </div>
+
+            <section class="card profile-card">
+              <div class="profile-top-bar"></div>
+              <div class="profile-head profile-name-block">
+                <div class="title-row">
+                  <h2 id="previewName" class="editable" contenteditable="true">캐릭터 이름</h2>
+                  <div id="previewEngName" class="eng-name editable" contenteditable="true">name</div>
+                </div>
+                <div id="previewSummary" class="summary editable" contenteditable="true">캐릭터의 간단한 개요 설명</div>
+              </div>
+
+              <div class="keyword-column">
+                <span id="previewKeyword1" class="keyword-pill editable" contenteditable="true">키워드</span>
+                <span id="previewKeyword2" class="keyword-pill editable" contenteditable="true">키워드</span>
+              </div>
+
+              <div class="main-portrait-frame">
+                <div class="main-portrait marble-bg-sub">
+                  <img id="mainPortrait" alt="메인 프로필" />
+                  <div class="placeholder-text">프로필 이미지</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card relation-card">
+              <div class="marker-icon" aria-hidden="true"></div>
+              <div class="relation-copy">
+                <div class="editable relation-title" contenteditable="true">캐릭터 이름과 함께 언급되는 대표 인물은...</div>
+                <div class="editable relation-name" contenteditable="true">캐릭터 이름.</div>
+                <div class="editable relation-desc" contenteditable="true">캐릭터의 간단한 개요 설명 관계성</div>
+              </div>
+              <div class="relation-portrait marble-bg-sub">
+                <img id="subPortrait" alt="관계 인물" />
+                <div class="placeholder-text">관련 인물</div>
+              </div>
+            </section>
+
+            <div class="relation-summary-stack">
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸1</div>
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸2</div>
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸 3</div>
+            </div>
+          </div>
+
+          <section class="wide-chip editable" contenteditable="true">
+            작품 역할은 [ OC의 역할 ]. 변경점은 [ OC가 추가되면서 원작에서 바뀐 요소들 ]
+          </section>
+
+          <div class="two-col-grid compact-grid">
+            <section class="section-box">
+              <div class="section-title editable" contenteditable="true">첫 등장</div>
+              <div id="introChecklist" class="checklist two-col-list"></div>
+            </section>
+
+            <section class="section-box">
+              <div class="section-title editable" contenteditable="true">소속</div>
+              <div id="affiliationChecklist" class="checklist two-col-list"></div>
+            </section>
+          </div>
+
+          <section class="section-box full-width episode-box">
+            <div class="section-title editable" contenteditable="true">메인 에피소드</div>
+            <div class="episode-grid">
+              <div class="episode-col editable" contenteditable="true">
+                <div class="episode-row"><strong>사건 포지션</strong><span>용의자</span></div>
+                <div class="episode-row"><strong>사건개요</strong><span>등장 사건 개요</span></div>
+              </div>
+              <div class="episode-col editable" contenteditable="true">
+                <div class="episode-row"><strong>사건 포지션</strong><span>용의자</span></div>
+                <div class="episode-row"><strong>사건개요</strong><span>등장 사건 개요</span></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="two-col-grid bottom-grid compact-grid">
+            <section class="section-box">
+              <div class="section-title editable" contenteditable="true">주요 시간선</div>
+              <div id="timelineChecklist" class="checklist two-col-list"></div>
+            </section>
+
+            <section class="section-box misc-box">
+              <div class="section-title editable" contenteditable="true">기타</div>
+              <div class="misc-grid editable" contenteditable="true">
+                <div class="misc-row"><strong>작품 포지션</strong><span>작품포지션</span></div>
+                <div class="misc-row"><strong>변화물</strong><span>적자</span></div>
+                <div class="misc-row"><strong>등장 빈도</strong><span>등장 빈도도 적자</span></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
