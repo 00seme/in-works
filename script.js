@@ -13,6 +13,7 @@ const defaults = {
   markerColor: '#4f4f4f',
   pillColor: '#595959',
   pillTextColor: '#ffffff',
+  lineColor: '#8a8a8a',
   name: '캐릭터 이름',
   engName: 'name',
   summary: '캐릭터의 간단한 개요 설명',
@@ -45,6 +46,7 @@ const elements = {
   markerColor: document.getElementById('markerColor'),
   pillColor: document.getElementById('pillColor'),
   pillTextColor: document.getElementById('pillTextColor'),
+  lineColor: document.getElementById('lineColor'),
   brickUpload: document.getElementById('brickUpload'),
   marbleUpload: document.getElementById('marbleUpload'),
   mainImageInput: document.getElementById('mainImageInput'),
@@ -109,6 +111,7 @@ function updateTheme() {
   root.style.setProperty('--marker-color', elements.markerColor.value);
   root.style.setProperty('--pill-color', elements.pillColor.value);
   root.style.setProperty('--pill-text-color', elements.pillTextColor.value);
+  root.style.setProperty('--line-color', elements.lineColor.value);
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
@@ -179,7 +182,15 @@ async function downloadPng() {
   const originalBoxShadow = sheet.style.boxShadow;
   sheet.style.boxShadow = 'none';
   try {
-    const dataUrl = await toPng(sheet, { cacheBust: true, pixelRatio: 2, skipFonts: false });
+    const dataUrl = await toPng(sheet, {
+      cacheBust: true,
+      pixelRatio: 2,
+      skipFonts: false,
+      canvasWidth: sheet.scrollWidth * 2,
+      canvasHeight: sheet.scrollHeight * 2,
+      width: sheet.scrollWidth,
+      height: sheet.scrollHeight
+    });
     const link = document.createElement('a');
     link.href = dataUrl;
     link.download = 'oc-sheet.png';
@@ -205,6 +216,7 @@ function resetAll() {
   elements.markerColor.value = defaults.markerColor;
   elements.pillColor.value = defaults.pillColor;
   elements.pillTextColor.value = defaults.pillTextColor;
+  elements.lineColor.value = defaults.lineColor;
   elements.nameInput.value = defaults.name;
   elements.engNameInput.value = defaults.engName;
   elements.summaryInput.value = defaults.summary;
@@ -240,7 +252,8 @@ Object.entries({
   pinColor: 'input',
   markerColor: 'input',
   pillColor: 'input',
-  pillTextColor: 'input'
+  pillTextColor: 'input',
+  lineColor: 'input'
 }).forEach(([key, eventName]) => {
   elements[key].addEventListener(eventName, () => {
     if (['nameInput', 'engNameInput', 'summaryInput', 'keyword1Input', 'keyword2Input'].includes(key)) {

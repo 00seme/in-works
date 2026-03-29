@@ -91,6 +91,9 @@
           <label>느낌표 색상
             <input type="color" id="markerColor" value="#4f4f4f" />
           </label>
+          <label>선 색상
+            <input type="color" id="lineColor" value="#8a8a8a" />
+          </label>
           <label>라벨 배경색
             <input type="color" id="pillColor" value="#595959" />
           </label>
@@ -129,49 +132,54 @@
           <div class="top-brick brick-bg"></div>
           <div class="sheet-curve"></div>
 
-          <div class="top-icons">
-            <div class="folder-icon" aria-hidden="true"></div>
-            <div class="folder-title editable" contenteditable="true">캐릭터 이름</div>
+          <div class="top-stack">
+            <div class="top-icons">
+              <div class="folder-icon" aria-hidden="true"></div>
+              <div class="folder-title editable" contenteditable="true">캐릭터 이름</div>
+            </div>
+
+            <section class="card profile-card">
+              <div class="profile-top-bar"></div>
+              <div class="profile-head profile-name-block">
+                <div class="title-row">
+                  <h2 id="previewName" class="editable" contenteditable="true">캐릭터 이름</h2>
+                  <div id="previewEngName" class="eng-name editable" contenteditable="true">name</div>
+                </div>
+                <div id="previewSummary" class="summary editable" contenteditable="true">캐릭터의 간단한 개요 설명</div>
+              </div>
+
+              <div class="keyword-column">
+                <span id="previewKeyword1" class="keyword-pill editable" contenteditable="true">키워드</span>
+                <span id="previewKeyword2" class="keyword-pill editable" contenteditable="true">키워드</span>
+              </div>
+
+              <div class="main-portrait-frame">
+                <div class="main-portrait marble-bg-sub">
+                  <img id="mainPortrait" alt="메인 프로필" />
+                  <div class="placeholder-text">프로필 이미지</div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card relation-card">
+              <div class="marker-icon" aria-hidden="true"></div>
+              <div class="relation-copy">
+                <div class="editable relation-title" contenteditable="true">캐릭터 이름과 함께 언급되는 대표 인물은...</div>
+                <div class="editable relation-name" contenteditable="true">캐릭터 이름.</div>
+                <div class="editable relation-desc" contenteditable="true">캐릭터의 간단한 개요 설명 관계성</div>
+              </div>
+              <div class="relation-portrait marble-bg-sub">
+                <img id="subPortrait" alt="관계 인물" />
+                <div class="placeholder-text">관련 인물</div>
+              </div>
+            </section>
+
+            <div class="relation-summary-stack">
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸1</div>
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸2</div>
+              <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸 3</div>
+            </div>
           </div>
-
-          <section class="card profile-card">
-            <div class="profile-head profile-name-block">
-              <div class="title-row">
-                <h2 id="previewName" class="editable" contenteditable="true">캐릭터 이름</h2>
-                <div id="previewEngName" class="eng-name editable" contenteditable="true">name</div>
-              </div>
-              <div id="previewSummary" class="summary editable" contenteditable="true">캐릭터의 간단한 개요 설명</div>
-            </div>
-
-            <div class="keyword-column">
-              <span id="previewKeyword1" class="keyword-pill editable" contenteditable="true">키워드</span>
-              <span id="previewKeyword2" class="keyword-pill editable" contenteditable="true">키워드</span>
-            </div>
-
-            <div class="main-portrait-frame">
-              <div class="main-portrait marble-bg-sub">
-                <img id="mainPortrait" alt="메인 프로필" />
-                <div class="placeholder-text">프로필 이미지</div>
-              </div>
-            </div>
-
-            <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸 1</div>
-            <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸 2</div>
-            <div class="relation-summary editable" contenteditable="true">관계성 요약 남칸 3</div>
-          </section>
-
-          <section class="card relation-card">
-            <div class="marker-icon" aria-hidden="true"></div>
-            <div class="relation-copy">
-              <div class="editable relation-title" contenteditable="true">캐릭터 이름과 함께 언급되는 대표 인물은...</div>
-              <div class="editable relation-name" contenteditable="true">캐릭터 이름.</div>
-              <div class="editable relation-desc" contenteditable="true">캐릭터의 간단한 개요 설명 관계성</div>
-            </div>
-            <div class="relation-portrait marble-bg-sub">
-              <img id="subPortrait" alt="관계 인물" />
-              <div class="placeholder-text">관련 인물</div>
-            </div>
-          </section>
 
           <section class="wide-chip editable" contenteditable="true">
             작품 역할은 [ OC의 역할 ]. 변경점은 [ OC가 추가되면서 원작에서 바뀐 요소들 ]
