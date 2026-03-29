@@ -314,7 +314,7 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .two-col-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 36px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 62px;
 }
 .section-box { position: relative; padding: 40px 34px 30px; min-height: 232px; }
 .section-title {
@@ -329,7 +329,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .check-item.checked .check-toggle { background: var(--check-color); border-color: var(--line-color); box-shadow: none; }
 .check-text { min-width: 0; line-height: 1.6; white-space: nowrap; font-size: 0.87rem; }
-.full-width { margin-top: 16px; }
+.full-width { margin-top: 54px; }
 .episode-box { min-height: 248px; }
 .episode-grid {
   display: grid;

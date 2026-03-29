@@ -184,8 +184,8 @@ async function handleUpload(input, callback) {
 }
 
 function bindEditableSync() {
-  elements.previewName.addEventListener('input', () => syncNameFrom(elements.previewName));
-  elements.folderTitle.addEventListener('input', () => syncNameFrom(elements.folderTitle));
+  elements.previewName.addEventListener('input', syncNameFromPreview);
+  elements.previewName.addEventListener('blur', syncTextInputs);
 
   [elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
     node.addEventListener('blur', syncTextInputs);
