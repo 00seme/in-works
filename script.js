@@ -102,18 +102,24 @@ function setMode(target, mode, type) {
 
 let isSyncingName = false;
 
-function syncNameFrom(sourceNode) {
+function applyNameToTargets(value, sourceKey = 'previewName') {
   if (isSyncingName) return;
   isSyncingName = true;
-  const syncedName = sourceNode.textContent.trim() || defaults.name;
-  elements.previewName.textContent = syncedName;
-  elements.folderTitle.textContent = syncedName;
-  elements.relationLinkedName.textContent = syncedName;
+  const syncedName = (value || '').trim() || defaults.name;
+  const targets = {
+    previewName: elements.previewName,
+    folderTitle: elements.folderTitle,
+    relationLinkedName: elements.relationLinkedName,
+  };
+  Object.entries(targets).forEach(([key, node]) => {
+    if (key === sourceKey) return;
+    if (node.textContent !== syncedName) node.textContent = syncedName;
+  });
   isSyncingName = false;
 }
 
 function syncTextInputs() {
-  syncNameFrom(elements.previewName);
+  applyNameToTargets(elements.previewName.textContent, 'previewName');
 
   if (!elements.previewEngName.textContent.trim()) {
     elements.previewEngName.textContent = defaults.engName;
@@ -184,8 +190,15 @@ async function handleUpload(input, callback) {
 }
 
 function bindEditableSync() {
-  elements.previewName.addEventListener('input', () => syncNameFrom(elements.previewName));
-  elements.folderTitle.addEventListener('input', () => syncNameFrom(elements.folderTitle));
+  elements.previewName.addEventListener('input', () => applyNameToTargets(elements.previewName.textContent, 'previewName'));
+  elements.previewName.addEventListener('blur', () => applyNameToTargets(elements.previewName.textContent, 'previewName'));
+  elements.folderTitle.addEventListener('blur', () => {
+    const value = elements.folderTitle.textContent.trim() || defaults.name;
+    if (elements.previewName.textContent !== value) {
+      elements.previewName.textContent = value;
+    }
+    applyNameToTargets(value, 'folderTitle');
+  });
 
   [elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
     node.addEventListener('blur', syncTextInputs);

@@ -303,7 +303,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -102px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -132px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
