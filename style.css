@@ -106,18 +106,21 @@ button.primary { background: #232323; color: #fff; }
   position: absolute;
   left: 0;
   top: 0;
-  width: 318px;
-  height: 232px;
+  width: 360px;
+  height: 248px;
   z-index: 0;
   overflow: hidden;
-  border-bottom-right-radius: 120px 84px;
+  border-bottom-right-radius: 150px 110px;
 }
 .sheet-curve {
   position: absolute;
-  inset: 0;
+  left: 22px;
+  top: 0;
+  right: 0;
+  bottom: 0;
   z-index: 1;
   background-color: var(--marble-solid-color);
-  border-top-left-radius: 260px 170px;
+  border-top-left-radius: 470px 300px;
 }
 
 .brick-bg.texture-mode {
@@ -180,8 +183,8 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .profile-card {
-  position: absolute; right: 36px; top: 52px;
-  width: 624px; min-height: 627px;
+  position: absolute; right: 21px; top: 52px;
+  width: 604px; min-height: 360px;
   padding: 24px 22px 20px;
 }
 .profile-top-bar {
@@ -190,7 +193,7 @@ button.primary { background: #232323; color: #fff; }
   border-bottom: 1px solid var(--line-color);
 }
 .profile-head {
-  width: 290px; margin-top: 44px;
+  width: 300px; margin-top: 44px;
 }
 .title-row { display: flex; gap: 16px; align-items: baseline; }
 #previewName { margin: 0; font-size: 2rem; line-height: 1.1; }
@@ -203,7 +206,7 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
 .keyword-column {
-  position: absolute; left: 332px; top: 176px;
+  position: absolute; left: 346px; top: 150px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -214,19 +217,19 @@ button.primary { background: #232323; color: #fff; }
   font-size: 0.92rem; font-weight: 700;
 }
 .main-portrait-frame {
-  position: absolute; right: 58px; top: 68px;
+  position: absolute; right: 58px; top: 58px;
 }
 .main-portrait, .relation-portrait {
   position: relative; overflow: hidden; border: 1px solid var(--line-color);
 }
 .main-portrait { width: 220px; height: 220px; border-radius: 50%; }
-.relation-portrait { width: 118px; height: 118px; border-radius: 50%; justify-self: center; }
+.relation-portrait { width: 148px; height: 148px; border-radius: 50%; justify-self: center; }
 
 .relation-card {
-  position: absolute; left: 19px; top: 336px;
-  width: 400px; min-height: 216px;
-  display: grid; grid-template-columns: 1fr 126px; gap: 12px;
-  align-items: center; padding: 22px 18px 18px 22px; z-index: 4;
+  position: absolute; left: 34px; top: 330px;
+  width: 380px; min-height: 176px;
+  display: grid; grid-template-columns: 1fr 150px; gap: 14px;
+  align-items: center; padding: 22px 16px 16px 18px; z-index: 4;
 }
 .relation-card::before {
   content: ''; position: absolute; left: 0; right: 0; top: 0; height: 28px;
@@ -241,16 +244,16 @@ button.primary { background: #232323; color: #fff; }
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding-top: 18px;
-  padding-left: 12px;
+  padding-left: 14px;
   border-left: 3px solid var(--line-color);
 }
-.relation-title { font-size: 0.96rem; line-height: 1.42; margin-bottom: 10px; }
-.relation-name { font-weight: 800; margin-bottom: 4px; font-size: 0.98rem; }
-.relation-desc { color: #555; font-size: 0.84rem; }
+.relation-title { font-size: 0.98rem; line-height: 1.38; margin-bottom: 12px; }
+.relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
+.relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
-  position: absolute; right: 8px; top: 702px; width: 560px;
+  position: absolute; right: 8px; top: 560px; width: 576px;
   display: grid; gap: 18px; z-index: 5;
 }
 .relation-summary {
