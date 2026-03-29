@@ -13,6 +13,8 @@ const defaults = {
   markerColor: '#4f4f4f',
   pillColor: '#595959',
   pillTextColor: '#ffffff',
+  relationCharacterColor: '#ffffff',
+  checkColor: '#555555',
   lineColor: '#8a8a8a',
   name: '캐릭터 이름',
   engName: 'name',
@@ -47,6 +49,8 @@ const elements = {
   markerColor: document.getElementById('markerColor'),
   pillColor: document.getElementById('pillColor'),
   pillTextColor: document.getElementById('pillTextColor'),
+  relationCharacterColor: document.getElementById('relationCharacterColor'),
+  checkColor: document.getElementById('checkColor'),
   lineColor: document.getElementById('lineColor'),
   brickUpload: document.getElementById('brickUpload'),
   marbleUpload: document.getElementById('marbleUpload'),
@@ -112,6 +116,8 @@ function updateTheme() {
   root.style.setProperty('--marker-color', elements.markerColor.value);
   root.style.setProperty('--pill-color', elements.pillColor.value);
   root.style.setProperty('--pill-text-color', elements.pillTextColor.value);
+  root.style.setProperty('--relation-character-color', elements.relationCharacterColor.value);
+  root.style.setProperty('--check-color', elements.checkColor.value);
   root.style.setProperty('--line-color', elements.lineColor.value);
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
@@ -223,6 +229,8 @@ function resetAll() {
   elements.markerColor.value = defaults.markerColor;
   elements.pillColor.value = defaults.pillColor;
   elements.pillTextColor.value = defaults.pillTextColor;
+  elements.relationCharacterColor.value = defaults.relationCharacterColor;
+  elements.checkColor.value = defaults.checkColor;
   elements.lineColor.value = defaults.lineColor;
   elements.nameInput.value = defaults.name;
   elements.engNameInput.value = defaults.engName;

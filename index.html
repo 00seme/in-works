@@ -100,6 +100,12 @@
           <label>라벨 글자색
             <input type="color" id="pillTextColor" value="#ffffff" />
           </label>
+          <label>관계캐릭터
+            <input type="color" id="relationCharacterColor" value="#ffffff" />
+          </label>
+          <label>체크 색상
+            <input type="color" id="checkColor" value="#555555" />
+          </label>
         </details>
 
         <details class="control-card control-section">
@@ -182,7 +188,7 @@
           </div>
 
           <section class="wide-chip editable" contenteditable="true">
-            작품 역할은 [ OC의 역할 ]. 변경점은 [ OC가 추가되면서 원작에서 바뀐 요소들 ]
+            <strong>작품 역할</strong>은 [ OC의 역할 ]. <strong>변경점</strong>은 [ OC가 추가되면서 원작에서 바뀐 요소들 ]
           </section>
 
           <div class="two-col-grid compact-grid">
@@ -227,13 +233,11 @@
             </section>
           </div>
 
-          <section class="section-box full-width credit-box">
-            <div class="section-title editable" contenteditable="true">크레딧</div>
-            <div class="credit-grid">
-              <div class="credit-item editable" contenteditable="true">@0_Z3ROo제작</div>
-              <div class="credit-item editable" contenteditable="true">커미션 크레딧 입력</div>
-            </div>
-          </section>
+          <div class="credit-line">
+            <span class="credit-fixed">@0_Z3ROo제작</span>
+            <span class="credit-divider">|</span>
+            <span class="credit-editable editable" contenteditable="true">커미션 크레딧 입력</span>
+          </div>
 
         </div>
       </main>
