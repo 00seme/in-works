@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OC 틀 메이커</title>
+    <title>[IN 작품 메이커]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -13,7 +13,7 @@
     <div class="app-shell">
       <aside class="controls">
         <div class="control-card">
-          <h1>OC 틀 메이커</h1>
+          <h1>[IN 작품 메이커]</h1>
           <p class="muted">오른쪽 시트의 텍스트를 직접 클릭해서 수정할 수 있습니다. 체크리스트는 클릭으로 체크, 텍스트 직접 수정이 가능합니다.</p>
           <div class="button-row">
             <button id="downloadPngBtn" class="primary">PNG 저장</button>
@@ -21,8 +21,8 @@
           </div>
         </div>
 
-        <div class="control-card">
-          <h2>이미지</h2>
+        <details class="control-card control-section" open>
+          <summary><h2>이미지</h2><span class="section-toggle">접기</span></summary>
           <label>메인 프로필 이미지
             <input type="file" id="mainImageInput" accept="image/*" />
           </label>
@@ -33,10 +33,10 @@
             <button data-clear-image="main">메인 이미지 삭제</button>
             <button data-clear-image="sub">관계 이미지 삭제</button>
           </div>
-        </div>
+        </details>
 
-        <div class="control-card">
-          <h2>벽돌 배경</h2>
+        <details class="control-card control-section" open>
+          <summary><h2>배경A</h2><span class="section-toggle">접기</span></summary>
           <label>모드
             <select id="brickMode">
               <option value="texture">기본 텍스처 + 색상</option>
@@ -57,10 +57,10 @@
           <label>블렌드 강도
             <input type="range" id="brickBlend" min="0" max="100" value="72" />
           </label>
-        </div>
+        </details>
 
-        <div class="control-card">
-          <h2>대리석 배경</h2>
+        <details class="control-card control-section" open>
+          <summary><h2>배경 B</h2><span class="section-toggle">접기</span></summary>
           <label>모드
             <select id="marbleMode">
               <option value="texture">기본 텍스처 + 색상</option>
@@ -81,10 +81,10 @@
           <label>블렌드 강도
             <input type="range" id="marbleBlend" min="0" max="100" value="28" />
           </label>
-        </div>
+        </details>
 
-        <div class="control-card">
-          <h2>아이콘 / 포인트 컬러</h2>
+        <details class="control-card control-section" open>
+          <summary><h2>아이콘 / 포인트 컬러</h2><span class="section-toggle">접기</span></summary>
           <label>압정 색상
             <input type="color" id="pinColor" value="#4f4f4f" />
           </label>
@@ -100,10 +100,10 @@
           <label>라벨 글자색
             <input type="color" id="pillTextColor" value="#ffffff" />
           </label>
-        </div>
+        </details>
 
-        <div class="control-card">
-          <h2>간단 입력</h2>
+        <details class="control-card control-section" open>
+          <summary><h2>간단 입력</h2><span class="section-toggle">접기</span></summary>
           <label>캐릭터 이름
             <input type="text" id="nameInput" value="캐릭터 이름" />
           </label>
@@ -119,7 +119,7 @@
           <label>키워드 2
             <input type="text" id="keyword2Input" value="키워드" />
           </label>
-        </div>
+        </details>
       </aside>
 
       <main class="preview-wrap">

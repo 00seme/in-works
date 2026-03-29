@@ -307,3 +307,14 @@ buildAllChecklists();
 bindEditableSync();
 syncTextInputs();
 updateTheme();
+
+
+document.querySelectorAll('.control-section').forEach((section) => {
+  const toggleLabel = section.querySelector('.section-toggle');
+  const refresh = () => {
+    if (!toggleLabel) return;
+    toggleLabel.textContent = section.open ? '접기' : '펼치기';
+  };
+  section.addEventListener('toggle', refresh);
+  refresh();
+});
