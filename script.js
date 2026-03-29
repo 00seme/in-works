@@ -31,7 +31,8 @@ const defaults = {
 const root = document.documentElement;
 const sheet = document.getElementById('sheet');
 const topBrick = document.querySelector('.top-brick');
-const marbleTargets = [sheet, ...document.querySelectorAll('.marble-bg-sub')];
+const marbleSurface = document.querySelector('.sheet-curve');
+const marbleTargets = [marbleSurface, ...document.querySelectorAll('.marble-bg-sub')];
 
 const elements = {
   brickMode: document.getElementById('brickMode'),
