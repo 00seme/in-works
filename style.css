@@ -218,7 +218,7 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
 .keyword-column {
-  position: absolute; left: 268px; top: 212px;
+  position: absolute; left: 248px; top: 212px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -271,8 +271,9 @@ button.primary { background: #232323; color: #fff; }
   height: 58px;
   border-left: 3px solid var(--line-color);
 }
-.relation-title { font-size: 1.4rem; line-height: 1.38; margin-bottom: 12px; }
-.relation-linked-name { font-weight: 800; }
+.relation-title { font-size: 1.34rem; line-height: 1.28; margin-bottom: 12px; letter-spacing: 0; word-break: keep-all; }
+.relation-linked-name { font-weight: 800; line-height: 1.18; }
+.relation-title-tail { font-size: 1.34rem; line-height: 1.28; font-weight: 400; }
 .relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
 .relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
@@ -287,7 +288,7 @@ button.primary { background: #232323; color: #fff; }
   box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
 }
 .relation-summary-stack .relation-summary:nth-child(2) { margin-left: 120px; }
-.relation-summary-stack .relation-summary:nth-child(3) { width: 394px; margin-left: 54px; }
+.relation-summary-stack .relation-summary:nth-child(3) { width: 384px; margin-left: 120px; }
 
 .main-portrait img, .relation-portrait img {
   width: 100%; height: 100%; object-fit: cover; object-position: calc(50% + var(--main-image-pos-x, 0px)) calc(50% + var(--main-image-pos-y, 0px)); transform: scale(var(--main-image-scale, 1)); transform-origin: center; display: none;
@@ -302,7 +303,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -72px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -102px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
@@ -328,7 +329,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .check-item.checked .check-toggle { background: var(--check-color); border-color: var(--line-color); box-shadow: none; }
 .check-text { min-width: 0; line-height: 1.6; white-space: nowrap; font-size: 0.87rem; }
-.full-width { margin-top: 16px; }
+.full-width { margin-top: 52px; }
 .episode-box { min-height: 248px; }
 .episode-grid {
   display: grid;

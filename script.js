@@ -100,11 +100,20 @@ function setMode(target, mode, type) {
   }
 }
 
+let isSyncingName = false;
+
+function syncNameFrom(sourceNode) {
+  if (isSyncingName) return;
+  isSyncingName = true;
+  const syncedName = sourceNode.textContent.trim() || defaults.name;
+  elements.previewName.textContent = syncedName;
+  elements.folderTitle.textContent = syncedName;
+  elements.relationLinkedName.textContent = syncedName;
+  isSyncingName = false;
+}
+
 function syncTextInputs() {
-  const nameValue = elements.previewName.textContent.trim() || defaults.name;
-  elements.previewName.textContent = nameValue;
-  elements.folderTitle.textContent = nameValue;
-  elements.relationLinkedName.textContent = nameValue;
+  syncNameFrom(elements.previewName);
 
   if (!elements.previewEngName.textContent.trim()) {
     elements.previewEngName.textContent = defaults.engName;
@@ -118,13 +127,6 @@ function syncTextInputs() {
   if (!elements.previewKeyword2.textContent.trim()) {
     elements.previewKeyword2.textContent = defaults.keyword2;
   }
-}
-
-function syncInputsFromEditable() {
-  const syncedName = elements.previewName.textContent.trim() || defaults.name;
-  elements.previewName.textContent = syncedName;
-  elements.folderTitle.textContent = syncedName;
-  elements.relationLinkedName.textContent = syncedName;
 }
 
 function updateTheme() {
@@ -182,14 +184,11 @@ async function handleUpload(input, callback) {
 }
 
 function bindEditableSync() {
-  [elements.previewName, elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
-    node.addEventListener('input', syncInputsFromEditable);
-  });
+  elements.previewName.addEventListener('input', () => syncNameFrom(elements.previewName));
+  elements.folderTitle.addEventListener('input', () => syncNameFrom(elements.folderTitle));
 
-  elements.folderTitle.addEventListener('input', () => {
-    const syncedName = elements.folderTitle.textContent.trim() || defaults.name;
-    elements.previewName.textContent = syncedName;
-    elements.relationLinkedName.textContent = syncedName;
+  [elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
+    node.addEventListener('blur', syncTextInputs);
   });
 }
 
