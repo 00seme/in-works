@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OC 시트 메이커</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="controls">
+        <section class="control-card">
+          <h1>OC 시트 메이커</h1>
+          <p class="muted">시안 비율에 맞춘 정적 웹앱입니다. GitHub Pages에 바로 올려서 사용할 수 있고, 오른쪽 시트는 클릭해서 직접 수정할 수 있습니다.</p>
+          <div class="button-row">
+            <button id="downloadPngBtn" class="primary">PNG 저장</button>
+            <button id="resetBtn">기본값 복원</button>
+          </div>
+        </section>
+
+        <section class="control-card">
+          <h2>기본 텍스트</h2>
+          <label>캐릭터 이름<input id="nameInput" type="text" value="캐릭터 이름" /></label>
+          <label>영문/별칭<input id="engNameInput" type="text" value="name" /></label>
+          <label>한줄 설명<textarea id="summaryInput" rows="3">캐릭터의 간단한 개요 설명</textarea></label>
+          <label>키워드 1<input id="keyword1Input" type="text" value="키워드" /></label>
+          <label>키워드 2<input id="keyword2Input" type="text" value="키워드" /></label>
+        </section>
+
+        <section class="control-card">
+          <h2>이미지</h2>
+          <label>메인 프로필 이미지<input id="mainImageInput" type="file" accept="image/*" /></label>
+          <label>관계 인물 이미지<input id="subImageInput" type="file" accept="image/*" /></label>
+          <div class="button-row two-up">
+            <button data-clear-image="main">메인 이미지 삭제</button>
+            <button data-clear-image="sub">관계 이미지 삭제</button>
+          </div>
+        </section>
+
+        <section class="control-card">
+          <h2>벽돌 배경</h2>
+          <label>모드
+            <select id="brickMode">
+              <option value="texture">기본 텍스처 + 색상</option>
+              <option value="upload">업로드 이미지</option>
+              <option value="solid">단색 채우기</option>
+              <option value="none">없음</option>
+            </select>
+          </label>
+          <label>벽돌 색상<input id="brickColor" type="color" value="#8a6649" /></label>
+          <label>업로드 이미지<input id="brickUpload" type="file" accept="image/*" /></label>
+          <label>단색 채우기<input id="brickSolidColor" type="color" value="#7c624d" /></label>
+          <label>텍스처 강도<input id="brickBlend" type="range" min="0" max="100" value="76" /></label>
+        </section>
+
+        <section class="control-card">
+          <h2>대리석 배경</h2>
+          <label>모드
+            <select id="marbleMode">
+              <option value="texture">기본 텍스처 + 색상</option>
+              <option value="upload">업로드 이미지</option>
+              <option value="solid">단색 채우기</option>
+              <option value="none">없음</option>
+            </select>
+          </label>
+          <label>대리석 색상<input id="marbleColor" type="color" value="#e7e7e7" /></label>
+          <label>업로드 이미지<input id="marbleUpload" type="file" accept="image/*" /></label>
+          <label>단색 채우기<input id="marbleSolidColor" type="color" value="#efefef" /></label>
+          <label>텍스처 강도<input id="marbleBlend" type="range" min="0" max="100" value="24" /></label>
+        </section>
+
+        <section class="control-card">
+          <h2>포인트 색상</h2>
+          <label>압정 색상<input id="pinColor" type="color" value="#4c4c4c" /></label>
+          <label>느낌표 색상<input id="markerColor" type="color" value="#4c4c4c" /></label>
+          <label>라벨 배경색<input id="pillColor" type="color" value="#5f5f5f" /></label>
+          <label>라벨 글자색<input id="pillTextColor" type="color" value="#ffffff" /></label>
+          <label>선 색상<input id="lineColor" type="color" value="#8c8c8c" /></label>
+        </section>
+      </aside>
+
+      <main class="preview-wrap">
+        <div class="preview-toolbar">
+          <strong>미리보기</strong>
+          <span class="muted small">체크리스트는 동그라미를 눌러 체크, 글자는 클릭해서 수정</span>
+        </div>
+
+        <div id="sheet" class="sheet marble-surface texture-mode">
+          <div id="brickLayer" class="brick-layer texture-mode"></div>
+          <div class="marble-ellipse"></div>
+
+          <div class="folder-zone">
+            <div class="folder-icon tint-pill" aria-hidden="true"></div>
+            <div class="folder-label editable" contenteditable="true">캐릭터 이름</div>
+          </div>
+
+          <section class="profile-panel paper-card">
+            <div class="profile-copy">
+              <div class="title-line">
+                <div id="previewName" class="main-title editable" contenteditable="true">캐릭터 이름</div>
+                <div id="previewEngName" class="eng-title editable" contenteditable="true">name</div>
+              </div>
+              <div class="summary-line">
+                <span class="summary-bar"></span>
+                <div id="previewSummary" class="editable summary-copy" contenteditable="true">캐릭터의 간단한 개요 설명</div>
+              </div>
+              <div class="keyword-column">
+                <span id="previewKeyword1" class="keyword-pill editable" contenteditable="true">키워드</span>
+                <span id="previewKeyword2" class="keyword-pill editable" contenteditable="true">키워드</span>
+              </div>
+              <div class="relation-chip editable" contenteditable="true">관계성 요약 남칸1</div>
+              <div class="relation-chip editable" contenteditable="true">관계성 요약 남칸2</div>
+              <div class="relation-chip editable" contenteditable="true">관계성 요약 남칸 3</div>
+            </div>
+            <div class="main-portrait-wrap marble-subsurface texture-mode">
+              <div class="main-portrait">
+                <img id="mainPortrait" alt="메인 프로필" />
+                <div class="placeholder-text">프로필 이미지</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="relation-panel paper-card">
+            <div class="marker-badge tint-marker" aria-hidden="true"></div>
+            <div class="relation-text">
+              <div class="relation-headline"><span class="editable emphasis" contenteditable="true">캐릭터 이름</span><span class="editable" contenteditable="true">과 함께 언급되는 대표 인물은 ...</span></div>
+              <div class="editable relation-name" contenteditable="true">캐릭터 이름.</div>
+              <div class="editable relation-body" contenteditable="true">캐릭터의 간단한 개요 설명 관계성</div>
+            </div>
+            <div class="relation-portrait-wrap marble-subsurface texture-mode">
+              <div class="relation-portrait">
+                <img id="subPortrait" alt="관계 인물" />
+                <div class="placeholder-text">관련 인물</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="pin-badge tint-pin" aria-hidden="true"></div>
+          <section class="role-bar editable" contenteditable="true">작중 역할은 [ OC의 역할 ]. 변경점은 [ OC가 추가되면서 원작에서 바뀐 요소들 ]</section>
+
+          <section class="section-card first-appearance">
+            <div class="section-pill">첫 등장</div>
+            <div class="checklist" data-list="appearance">
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">피해자</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">용의자</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">범인</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">목격자</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">참고인</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">수사 관계자</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">의뢰인</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">조직 관계자</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">주변인</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">재등장 암시</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">단역+전환</span></div>
+              <div class="check-item"><button class="check-toggle" type="button" aria-label="체크"></button><span class="check-text editable" contenteditable="true">에피소드 이름</span></div>
+            </div>
+          </section>
+
+          <section class="section-card affiliation">
+            <div class="section-pill">소속</div>
+            <div class="checklist" data-list="affiliation">
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">위장 신분</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">탐정</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">경시청 경찰</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">경찰청 경찰</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">해외 기관</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">스파이</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">코어</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">공안</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">검은조직</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">학생</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">일반인</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">고위 관료 자제</span></div>
+            </div>
+          </section>
+
+          <section class="section-card episode-section full-width">
+            <div class="section-pill">메인 에피소드</div>
+            <div class="episode-grid">
+              <div class="episode-col editable" contenteditable="true"><strong>사건 포지션</strong> 　 용의자<br /><strong>사건개요</strong> 　 등장 사건 개요</div>
+              <div class="episode-col editable" contenteditable="true"><strong>사건 포지션</strong> 　 용의자<br /><strong>사건개요</strong> 　 등장 사건 개요</div>
+            </div>
+          </section>
+
+          <section class="section-card timeline">
+            <div class="section-pill">주요 시간선</div>
+            <div class="checklist" data-list="timeline">
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">원작 시점</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">원작 과거 시점</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">원작 미래 시점</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">완결 이후 시점</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">생존 IF</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">사망 이전</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">조직 궤멸 이후</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">극장판 기반</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">경찰학교 시절</span></div>
+              <div class="check-item"><button class="check-toggle" type="button"></button><span class="check-text editable" contenteditable="true">조직 시절</span></div>
+            </div>
+          </section>
+
+          <section class="section-card misc">
+            <div class="section-pill">기타</div>
+            <div class="misc-grid editable" contenteditable="true">
+              <strong>작품 포지션</strong> 　 작품포지션<br />
+              변화물<br />
+              적자<br /><br />
+              <strong>등장 빈도</strong> 　 등장 빈도도 적자
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
