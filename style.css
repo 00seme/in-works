@@ -106,20 +106,20 @@ button.primary { background: #232323; color: #fff; }
   position: absolute;
   left: 0;
   top: 0;
-  width: 470px;
-  height: 470px;
+  width: 520px;
+  height: 520px;
   z-index: 0;
   overflow: hidden;
 }
 .sheet-curve {
   position: absolute;
-  left: 118px;
-  top: 0;
-  width: 862px;
-  height: 470px;
+  left: -13px;
+  top: -66px;
+  width: 1396px;
+  height: 1396px;
   z-index: 1;
   background-color: var(--marble-solid-color);
-  border-top-left-radius: 430px 280px;
+  border-radius: 50%;
 }
 
 .brick-bg.texture-mode {
