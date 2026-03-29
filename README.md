@@ -1,20 +1,45 @@
-# OC 시트 메이커
+# OC 틀 메이커
 
-GitHub Pages에 바로 배포할 수 있는 정적 웹앱입니다.
-
-## 배포 방법
-1. 이 폴더의 파일을 GitHub 저장소 루트에 업로드합니다.
-2. GitHub 저장소에서 **Settings > Pages** 로 이동합니다.
-3. **Build and deployment / Source** 를 `Deploy from a branch` 로 바꿉니다.
-4. **Branch** 는 `main`, **Folder** 는 `/(root)` 로 선택합니다.
-5. 저장 후 잠시 기다리면 배포 주소가 생성됩니다.
+정적 HTML/CSS/JS만으로 만든 OC 시트 편집기입니다. GitHub Pages에 그대로 올려서 사용할 수 있습니다.
 
 ## 포함 기능
-- 시안 비율에 맞춘 세로형 OC 시트
-- 벽돌 배경: 기본 텍스처 색상 변경 / 업로드 이미지 / 단색 / 제거
-- 대리석 배경: 기본 텍스처 색상 변경 / 업로드 이미지 / 단색 / 제거
+
+- 시트 내용을 브라우저에서 직접 수정
+- PNG 추출
+- 벽돌 배경:
+  - 기본 텍스처 + 색상 변경
+  - 업로드 이미지로 교체
+  - 텍스처 제거 후 단색 채우기
+  - 완전 제거
+- 대리석 배경:
+  - 기본 텍스처 + 색상 변경
+  - 업로드 이미지로 교체
+  - 텍스처 제거 후 단색 채우기
+  - 완전 제거
 - 압정 / 느낌표 / 라벨 색상 변경
 - 메인 이미지 / 관계 이미지 업로드
-- 체크리스트 항목 텍스트 직접 수정
-- 체크리스트 동그라미 클릭 체크
-- PNG 저장
+
+## 파일 구조
+
+- `index.html`
+- `style.css`
+- `script.js`
+- `assets/brick-default.png`
+- `assets/marble-default.png`
+- `assets/pin.png`
+- `assets/exclamation.png`
+
+## GitHub Pages 배포 방법
+
+1. 새 GitHub 저장소 생성
+2. 이 폴더의 파일을 그대로 업로드
+3. GitHub 저장소의 **Settings → Pages**로 이동
+4. **Build and deployment**에서 **Deploy from a branch** 선택
+5. 브랜치를 `main`, 폴더를 `/ (root)`로 선택 후 저장
+6. 잠시 뒤 배포 주소가 생성됨
+
+## 수정 팁
+
+- 기본 배경 이미지를 바꾸려면 `assets` 폴더의 PNG 파일을 교체하면 됩니다.
+- 시트 레이아웃을 더 바꾸고 싶으면 `index.html`과 `style.css`를 수정하면 됩니다.
+- export 품질은 `script.js`의 `pixelRatio` 값으로 조절할 수 있습니다.
