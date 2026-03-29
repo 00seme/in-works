@@ -81,18 +81,18 @@ button.primary { background: #232323; color: #fff; }
 }
 .sheet-curve {
   position: absolute;
-  top: -26px;
-  left: 76px;
-  width: 930px;
-  height: 320px;
-  border-radius: 999px 0 0 999px;
-  background: rgba(255,255,255,0.70);
+  top: -92px;
+  left: 34px;
+  width: 1040px;
+  height: 402px;
+  border-radius: 999px 999px 0 0;
+  background: rgba(255,255,255,0.76);
   z-index: 1;
 }
 .top-brick {
   position: absolute;
   top: 0; left: 0;
-  width: 360px; height: 218px; z-index: 0;
+  width: 388px; height: 236px; z-index: 0;
 }
 
 .brick-bg.texture-mode {
@@ -123,10 +123,11 @@ button.primary { background: #232323; color: #fff; }
 .marble-bg.none-mode, .marble-bg-sub.none-mode { background: transparent; }
 
 .top-stack, .wide-chip, .two-col-grid, .episode-box, .bottom-grid { position: relative; z-index: 2; }
-.top-stack { position: relative; height: 544px; }
+.top-stack { position: relative; height: 524px; }
 .top-icons {
-  position: absolute; left: 126px; top: 60px;
+  position: absolute; left: 114px; top: 74px;
   display: flex; flex-direction: column; align-items: center; gap: 10px;
+  z-index: 5;
 }
 .folder-icon, .marker-icon {
   display: inline-block;
@@ -148,9 +149,9 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .profile-card {
-  position: absolute; right: 34px; top: 8px;
-  width: 700px; min-height: 422px;
-  padding: 28px 28px 24px;
+  position: absolute; right: 36px; top: 18px;
+  width: 662px; min-height: 392px;
+  padding: 26px 24px 24px;
 }
 .profile-top-bar {
   position: absolute; top: 0; left: 0; right: 0; height: 28px;
@@ -158,7 +159,7 @@ button.primary { background: #232323; color: #fff; }
   border-bottom: 1px solid var(--line-color);
 }
 .profile-head {
-  width: 360px; margin-top: 40px;
+  width: 332px; margin-top: 40px;
 }
 .title-row { display: flex; gap: 16px; align-items: baseline; }
 #previewName { margin: 0; font-size: 2rem; line-height: 1.1; }
@@ -171,8 +172,9 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
 .keyword-column {
-  position: absolute; left: 390px; top: 162px;
-  display: flex; flex-direction: column; gap: 12px;
+  position: absolute; right: 170px; top: 144px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 4;
 }
 .keyword-pill, .section-title { background: var(--pill-color); color: var(--pill-text-color); }
 .keyword-pill {
@@ -181,19 +183,19 @@ button.primary { background: #232323; color: #fff; }
   font-size: 0.92rem; font-weight: 700;
 }
 .main-portrait-frame {
-  position: absolute; right: 58px; top: 44px;
+  position: absolute; right: 58px; top: 68px;
 }
 .main-portrait, .relation-portrait {
   position: relative; overflow: hidden; border: 1px solid var(--line-color);
 }
-.main-portrait { width: 246px; height: 246px; border-radius: 50%; }
-.relation-portrait { width: 146px; height: 146px; border-radius: 50%; justify-self: center; }
+.main-portrait { width: 218px; height: 218px; border-radius: 50%; }
+.relation-portrait { width: 150px; height: 150px; border-radius: 50%; justify-self: center; }
 
 .relation-card {
-  position: absolute; left: 2px; top: 252px;
-  width: 536px; min-height: 178px;
-  display: grid; grid-template-columns: 44px 1fr 156px; gap: 12px;
-  align-items: center; padding: 18px 20px 18px 14px; z-index: 4;
+  position: absolute; left: 18px; top: 284px;
+  width: 512px; min-height: 166px;
+  display: grid; grid-template-columns: 1fr 168px; gap: 18px;
+  align-items: center; padding: 18px 22px 18px 26px; z-index: 4;
 }
 .relation-card::before {
   content: ''; position: absolute; left: 0; right: 0; top: 0; height: 28px;
@@ -204,12 +206,16 @@ button.primary { background: #232323; color: #fff; }
   width: 40px; height: 54px; background: var(--marker-color);
   mask-image: url('./assets/exclamation.png'); -webkit-mask-image: url('./assets/exclamation.png');
 }
-.relation-copy { padding-top: 22px; }
-.relation-title { font-size: 1.02rem; line-height: 1.4; margin-bottom: 8px; }
+.relation-copy {
+  padding-top: 20px;
+  padding-left: 14px;
+  border-left: 4px solid var(--line-color);
+}
+.relation-title { font-size: 1.02rem; line-height: 1.45; margin-bottom: 14px; }
 .relation-name { font-weight: 800; margin-bottom: 4px; }
 .relation-desc { color: #555; font-size: 0.92rem; }
 .relation-summary-stack {
-  position: absolute; right: 12px; top: 374px; width: 482px;
+  position: absolute; right: 8px; top: 360px; width: 470px;
   display: grid; gap: 22px; z-index: 5;
 }
 .relation-summary {
@@ -217,6 +223,9 @@ button.primary { background: #232323; color: #fff; }
   padding: 0 18px; border: 1px solid var(--line-color); border-radius: 999px;
   background: rgba(255,255,255,0.70); text-align: center; font-weight: 700;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
+}
+.relation-summary-stack .relation-summary:nth-child(2) {
+  margin-left: -26px;
 }
 
 .main-portrait img, .relation-portrait img {
@@ -230,8 +239,8 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: 10px; min-height: 48px; display: flex; align-items: center;
-  padding: 12px 18px 12px 32px;
+  margin-top: 10px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  padding: 12px 26px 12px 40px; text-align: center;
 }
 .wide-chip::before {
   content: ''; position: absolute; width: 22px; height: 26px; left: 8px; top: -16px;
