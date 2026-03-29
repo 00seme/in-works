@@ -62,6 +62,7 @@ const elements = {
   keyword1Input: document.getElementById('keyword1Input'),
   keyword2Input: document.getElementById('keyword2Input'),
   previewName: document.getElementById('previewName'),
+  folderTitle: document.getElementById('folderTitle'),
   previewEngName: document.getElementById('previewEngName'),
   previewSummary: document.getElementById('previewSummary'),
   previewKeyword1: document.getElementById('previewKeyword1'),
@@ -91,6 +92,7 @@ function setMode(target, mode, type) {
 
 function syncTextInputs() {
   elements.previewName.textContent = elements.nameInput.value || defaults.name;
+  elements.folderTitle.textContent = elements.nameInput.value || defaults.name;
   elements.previewEngName.textContent = elements.engNameInput.value || defaults.engName;
   elements.previewSummary.textContent = elements.summaryInput.value || defaults.summary;
   elements.previewKeyword1.textContent = elements.keyword1Input.value || defaults.keyword1;
@@ -98,7 +100,9 @@ function syncTextInputs() {
 }
 
 function syncInputsFromEditable() {
-  elements.nameInput.value = elements.previewName.textContent.trim();
+  const syncedName = elements.previewName.textContent.trim();
+  elements.nameInput.value = syncedName;
+  elements.folderTitle.textContent = syncedName;
   elements.engNameInput.value = elements.previewEngName.textContent.trim();
   elements.summaryInput.value = elements.previewSummary.textContent.trim();
   elements.keyword1Input.value = elements.previewKeyword1.textContent.trim();
@@ -156,7 +160,14 @@ function bindEditableSync() {
   [elements.previewName, elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
     node.addEventListener('input', syncInputsFromEditable);
   });
+
+  elements.folderTitle.addEventListener('input', () => {
+    const syncedName = elements.folderTitle.textContent.trim() || defaults.name;
+    elements.previewName.textContent = syncedName;
+    elements.nameInput.value = syncedName;
+  });
 }
+
 
 function createChecklist(containerId, items) {
   const container = document.getElementById(containerId);
@@ -268,6 +279,8 @@ Object.entries({
   markerColor: 'input',
   pillColor: 'input',
   pillTextColor: 'input',
+  relationCharacterColor: 'input',
+  checkColor: 'input',
   lineColor: 'input'
 }).forEach(([key, eventName]) => {
   elements[key].addEventListener(eventName, () => {

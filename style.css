@@ -184,7 +184,7 @@ button.primary { background: #232323; color: #fff; }
 
 .profile-card {
   position: absolute; right: -39px; top: 52px;
-  width: 584px; min-height: 310px;
+  width: 584px; min-height: 410px;
   padding: 24px 22px 20px;
 }
 .profile-top-bar {
@@ -205,8 +205,8 @@ button.primary { background: #232323; color: #fff; }
   border-left: 4px solid var(--pill-color);
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
-.keyword-column {
-  position: absolute; left: 318px; top: 112px;
+ .keyword-column {
+  position: absolute; left: 318px; top: 212px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -233,7 +233,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .relation-card::before {
   content: ''; position: absolute; left: 0; right: 0; top: 0; height: 28px;
-  border-radius: 18px 18px 0 0; background: rgba(0,0,0,0.12); border-bottom: 1px solid var(--line-color);
+  border-radius: 18px 18px 0 0; background: var(--relation-character-color); border-bottom: 1px solid var(--line-color);
 }
 .marker-icon {
   position: absolute; left: 10px; top: -52px;
@@ -264,12 +264,12 @@ button.primary { background: #232323; color: #fff; }
 .relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
 .relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
-  position: absolute; right: -48px; top: 400px; width: 610px;
+  position: absolute; right: 2px; top: 350px; width: 610px;
   display: grid; gap: 18px; z-index: 5;
 }
 .relation-summary {
   min-height: 46px; display: flex; align-items: center; justify-content: center;
-  width: 444px;
+  width: 394px;
   padding: 0 18px; border: 1px solid var(--line-color); border-radius: 999px;
   background: #ffffff; text-align: center; font-weight: 700;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
@@ -278,7 +278,7 @@ button.primary { background: #232323; color: #fff; }
   margin-left: 120px;
 }
 .relation-summary-stack .relation-summary:nth-child(3) {
-  width: 444px;
+  width: 394px;
   margin-left: 54px;
 }
 
@@ -319,9 +319,9 @@ button.primary { background: #232323; color: #fff; }
   display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start; min-width: 0;
 }
 .check-toggle {
-  width: 16px; height: 16px; margin-top: 4px; border: 1px solid var(--check-color); border-radius: 50%; background: #ffffff; padding: 0;
+  width: 16px; height: 16px; margin-top: 4px; border: 1px solid var(--line-color); border-radius: 50%; background: #ffffff; padding: 0; transition: background-color 120ms ease;
 }
-.check-item.checked .check-toggle { background: var(--check-color); box-shadow: none; }
+.check-item.checked .check-toggle { background: var(--check-color); border-color: var(--line-color); box-shadow: none; }
 .check-text { min-width: 0; line-height: 1.6; white-space: nowrap; font-size: 0.87rem; }
 .full-width { margin-top: 46px; }
 .episode-box { min-height: 248px; }
