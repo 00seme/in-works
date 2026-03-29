@@ -32,6 +32,9 @@
           <label>메인 프로필 세로 이동
             <input type="range" id="mainImagePosY" min="-200" max="200" value="0" />
           </label>
+          <label>메인 프로필 확대/축소
+            <input type="range" id="mainImageScale" min="50" max="180" value="100" />
+          </label>
           <label>관계 인물 이미지
             <input type="file" id="subImageInput" accept="image/*" />
           </label>
@@ -225,12 +228,12 @@
             <div class="section-title editable" contenteditable="true">메인 에피소드</div>
             <div class="episode-grid">
               <div class="episode-col">
-                <div class="episode-row"><strong>사건 포지션</strong><span class="editable" contenteditable="true">용의자</span></div>
-                <div class="episode-row"><strong>사건개요</strong><span class="editable episode-body" contenteditable="true">등장 사건 개요</span></div>
+                <div class="episode-row"><strong class="editable-label" contenteditable="true">사건 포지션</strong><span class="editable" contenteditable="true">용의자</span></div>
+                <div class="episode-row"><strong class="editable-label" contenteditable="true">사건 개요</strong><span class="editable episode-body editable-block" contenteditable="true">등장 사건 개요</span></div>
               </div>
               <div class="episode-col">
-                <div class="episode-row"><strong>사건 포지션</strong><span class="editable" contenteditable="true">용의자</span></div>
-                <div class="episode-row"><strong>사건개요</strong><span class="editable episode-body" contenteditable="true">등장 사건 개요</span></div>
+                <div class="episode-row"><strong class="editable-label" contenteditable="true">사건 포지션</strong><span class="editable" contenteditable="true">용의자</span></div>
+                <div class="episode-row"><strong class="editable-label" contenteditable="true">사건 개요</strong><span class="editable episode-body editable-block" contenteditable="true">등장 사건 개요</span></div>
               </div>
             </div>
           </section>
@@ -244,9 +247,8 @@
             <section class="section-box">
               <div class="section-title editable" contenteditable="true">기타</div>
               <div class="misc-grid">
-                <div class="misc-row"><strong>비고</strong><span class="editable" contenteditable="true">기타 설정 정리</span></div>
-                <div class="misc-row"><strong>메모</strong><span class="editable" contenteditable="true">자유 메모 영역</span></div>
-                <div class="misc-row"><strong>특이사항</strong><span class="editable" contenteditable="true">추가 특이사항 정리</span></div>
+                <div class="misc-row misc-row-tall"><strong class="editable-label" contenteditable="true">작품 포지션</strong><div class="editable editable-block misc-multiline" contenteditable="true">작품포지션<br>변화물<br>적자</div></div>
+                <div class="misc-row"><strong class="editable-label" contenteditable="true">등장 빈도</strong><span class="editable" contenteditable="true">등장 빈도도 적자</span></div>
               </div>
             </section>
           </div>

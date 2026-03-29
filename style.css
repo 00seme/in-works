@@ -197,7 +197,7 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .profile-card {
-  position: absolute; right: -39px; top: 52px;
+  position: absolute; right: -29px; top: 52px;
   width: 584px; min-height: 410px;
   padding: 24px 22px 20px;
 }
@@ -280,7 +280,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .relation-summary {
   min-height: 46px; display: flex; align-items: center; justify-content: center;
-  width: 394px;
+  width: 384px;
   padding: 0 18px; border: 1px solid var(--line-color); border-radius: 999px;
   background: #ffffff; text-align: center; font-weight: 700;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
@@ -289,8 +289,10 @@ button.primary { background: #232323; color: #fff; }
 .relation-summary-stack .relation-summary:nth-child(3) { width: 394px; margin-left: 54px; }
 
 .main-portrait img, .relation-portrait img {
-  width: 100%; height: 100%; object-fit: cover; display: none;
+  width: 100%; height: 100%; object-fit: cover; object-position: calc(50% + var(--main-image-pos-x, 0px)) calc(50% + var(--main-image-pos-y, 0px)); transform: scale(var(--main-image-scale, 1)); transform-origin: center; display: none;
 }
+.relation-portrait img { object-position: center; transform: none; }
+
 .main-portrait.has-image img, .relation-portrait.has-image img { display: block; }
 .placeholder-text {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -299,7 +301,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -42px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -72px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
@@ -310,7 +312,7 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .two-col-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 36px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 6px;
 }
 .section-box { position: relative; padding: 40px 34px 30px; min-height: 232px; }
 .section-title {
@@ -325,7 +327,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .check-item.checked .check-toggle { background: var(--check-color); border-color: var(--line-color); box-shadow: none; }
 .check-text { min-width: 0; line-height: 1.6; white-space: nowrap; font-size: 0.87rem; }
-.full-width { margin-top: 46px; }
+.full-width { margin-top: 16px; }
 .episode-box { min-height: 248px; }
 .episode-grid {
   display: grid;

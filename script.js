@@ -27,6 +27,7 @@ const defaults = {
   keyword2: '키워드',
   mainImagePosX: 0,
   mainImagePosY: 0,
+  mainImageScale: 100,
   brickImage: './assets/brick-default.png',
   marbleImage: './assets/marble-default.png',
   checklists: {
@@ -67,6 +68,7 @@ const elements = {
   mainImageInput: document.getElementById('mainImageInput'),
   mainImagePosX: document.getElementById('mainImagePosX'),
   mainImagePosY: document.getElementById('mainImagePosY'),
+  mainImageScale: document.getElementById('mainImageScale'),
   subImageInput: document.getElementById('subImageInput'),
   nameInput: document.getElementById('nameInput'),
   engNameInput: document.getElementById('engNameInput'),
@@ -144,6 +146,7 @@ function updateTheme() {
   root.style.setProperty('--line-color', elements.lineColor.value);
   root.style.setProperty('--main-image-pos-x', `${elements.mainImagePosX.value}px`);
   root.style.setProperty('--main-image-pos-y', `${elements.mainImagePosY.value}px`);
+  root.style.setProperty('--main-image-scale', String(Number(elements.mainImageScale.value) / 100));
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
@@ -276,6 +279,7 @@ function resetAll() {
   elements.keyword2Input.value = defaults.keyword2;
   elements.mainImagePosX.value = defaults.mainImagePosX;
   elements.mainImagePosY.value = defaults.mainImagePosY;
+  elements.mainImageScale.value = defaults.mainImageScale;
   brickImageData = defaults.brickImage;
   marbleImageData = defaults.marbleImage;
   syncTextInputs();
@@ -297,6 +301,7 @@ Object.entries({
   keyword2Input: 'input',
   mainImagePosX: 'input',
   mainImagePosY: 'input',
+  mainImageScale: 'input',
   brickMode: 'change',
   marbleMode: 'change',
   brickColor: 'input',
