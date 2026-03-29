@@ -120,13 +120,14 @@ button.primary { background: #232323; color: #fff; }
 }
 .sheet-curve {
   position: absolute;
-  left: -13px;
-  top: -66px;
-  width: 1396px;
-  height: 1396px;
+  left: 112px;
+  top: -368px;
+  width: 1320px;
+  height: 860px;
   z-index: 1;
-  background-color: var(--marble-solid-color);
   border-radius: 50%;
+  background-color: var(--marble-solid-color);
+  background-repeat: no-repeat;
 }
 
 .brick-bg.texture-mode {
@@ -148,11 +149,17 @@ button.primary { background: #232323; color: #fff; }
     linear-gradient(rgba(255,255,255,var(--marble-blend-alpha)), rgba(255,255,255,var(--marble-blend-alpha))),
     linear-gradient(var(--marble-color), var(--marble-color)),
     var(--marble-image);
-  background-size: cover, cover, cover;
-  background-position: calc(50% + var(--marble-pos-x)) calc(50% + var(--marble-pos-y));
+  background-size: 980px 1480px, 980px 1480px, 980px 1480px;
+  background-position: var(--marble-pos-x) var(--marble-pos-y), var(--marble-pos-x) var(--marble-pos-y), var(--marble-pos-x) var(--marble-pos-y);
+  background-repeat: no-repeat;
   background-blend-mode: screen, multiply, normal;
 }
-.marble-bg.upload-mode, .marble-bg-sub.upload-mode { background-image: var(--marble-image); background-size: cover; background-position: calc(50% + var(--marble-pos-x)) calc(50% + var(--marble-pos-y)); }
+.marble-bg.upload-mode, .marble-bg-sub.upload-mode {
+  background-image: var(--marble-image);
+  background-size: 980px 1480px;
+  background-position: var(--marble-pos-x) var(--marble-pos-y);
+  background-repeat: no-repeat;
+}
 .marble-bg.solid-mode, .marble-bg-sub.solid-mode { background-image: none; background-color: var(--marble-solid-color); }
 .marble-bg.none-mode, .marble-bg-sub.none-mode { background: transparent; }
 
@@ -234,7 +241,7 @@ button.primary { background: #232323; color: #fff; }
 
 .relation-card {
   position: absolute; left: 14px; top: 330px;
-  width: 460px; min-height: 234px;
+  width: 460px; min-height: 274px;
   display: grid; grid-template-columns: 1fr 126px; gap: 10px;
   align-items: center; padding: 22px 16px 16px 18px; z-index: 4;
 }
@@ -273,22 +280,22 @@ button.primary { background: #232323; color: #fff; }
 .relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
 .relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
-  position: absolute; right: -18px; top: 320px; width: 610px;
+  position: absolute; right: 12px; top: 290px; width: 560px;
   display: grid; gap: 18px; z-index: 5;
 }
 .relation-summary {
   min-height: 46px; display: flex; align-items: center; justify-content: center;
-  width: 344px;
+  width: 394px;
   padding: 0 18px; border: 1px solid var(--line-color); border-radius: 999px;
   background: #ffffff; text-align: center; font-weight: 700;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.08);
 }
 .relation-summary-stack .relation-summary:nth-child(2) {
-  margin-left: 120px;
+  margin-left: 136px;
 }
 .relation-summary-stack .relation-summary:nth-child(3) {
-  width: 344px;
-  margin-left: 54px;
+  width: 394px;
+  margin-left: 72px;
 }
 
 .main-portrait img, .relation-portrait img {
