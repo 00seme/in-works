@@ -106,21 +106,21 @@ button.primary { background: #232323; color: #fff; }
   position: absolute;
   left: 0;
   top: 0;
-  width: 360px;
-  height: 248px;
+  width: 340px;
+  height: 340px;
   z-index: 0;
   overflow: hidden;
-  border-bottom-right-radius: 150px 110px;
+  border-bottom-right-radius: 210px;
 }
 .sheet-curve {
   position: absolute;
-  left: 22px;
+  left: 118px;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 1;
   background-color: var(--marble-solid-color);
-  border-top-left-radius: 470px 300px;
+  border-top-left-radius: 540px 370px;
 }
 
 .brick-bg.texture-mode {
@@ -223,13 +223,13 @@ button.primary { background: #232323; color: #fff; }
   position: relative; overflow: hidden; border: 1px solid var(--line-color);
 }
 .main-portrait { width: 220px; height: 220px; border-radius: 50%; }
-.relation-portrait { width: 148px; height: 148px; border-radius: 50%; justify-self: center; }
+.relation-portrait { width: 168px; height: 168px; border-radius: 50%; justify-self: center; }
 
 .relation-card {
-  position: absolute; left: 34px; top: 330px;
-  width: 380px; min-height: 176px;
-  display: grid; grid-template-columns: 1fr 150px; gap: 14px;
-  align-items: center; padding: 22px 16px 16px 18px; z-index: 4;
+  position: absolute; left: 54px; top: 330px;
+  width: 365px; min-height: 200px;
+  display: grid; grid-template-columns: 1fr 160px; gap: 12px;
+  align-items: center; padding: 22px 18px 18px 18px; z-index: 4;
 }
 .relation-card::before {
   content: ''; position: absolute; left: 0; right: 0; top: 0; height: 28px;
@@ -246,14 +246,29 @@ button.primary { background: #232323; color: #fff; }
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 18px;
-  padding-left: 14px;
-  border-left: 3px solid var(--line-color);
+  padding-left: 8px;
 }
-.relation-title { font-size: 0.98rem; line-height: 1.38; margin-bottom: 12px; }
+.relation-title {
+  position: relative;
+  font-size: 0.98rem;
+  line-height: 1.38;
+  margin-bottom: 12px;
+  min-height: 74px;
+  padding-left: 14px;
+}
+.relation-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--line-color);
+}
 .relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
 .relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
-  position: absolute; right: 8px; top: 560px; width: 576px;
+  position: absolute; right: 8px; top: 442px; width: 588px;
   display: grid; gap: 18px; z-index: 5;
 }
 .relation-summary {
