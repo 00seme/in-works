@@ -70,11 +70,6 @@ const elements = {
   mainImagePosY: document.getElementById('mainImagePosY'),
   mainImageScale: document.getElementById('mainImageScale'),
   subImageInput: document.getElementById('subImageInput'),
-  nameInput: document.getElementById('nameInput'),
-  engNameInput: document.getElementById('engNameInput'),
-  summaryInput: document.getElementById('summaryInput'),
-  keyword1Input: document.getElementById('keyword1Input'),
-  keyword2Input: document.getElementById('keyword2Input'),
   previewName: document.getElementById('previewName'),
   folderTitle: document.getElementById('folderTitle'),
   previewEngName: document.getElementById('previewEngName'),
@@ -106,24 +101,30 @@ function setMode(target, mode, type) {
 }
 
 function syncTextInputs() {
-  elements.previewName.textContent = elements.nameInput.value || defaults.name;
-  elements.folderTitle.textContent = elements.nameInput.value || defaults.name;
-  elements.relationLinkedName.textContent = elements.nameInput.value || defaults.name;
-  elements.previewEngName.textContent = elements.engNameInput.value || defaults.engName;
-  elements.previewSummary.textContent = elements.summaryInput.value || defaults.summary;
-  elements.previewKeyword1.textContent = elements.keyword1Input.value || defaults.keyword1;
-  elements.previewKeyword2.textContent = elements.keyword2Input.value || defaults.keyword2;
+  const nameValue = elements.previewName.textContent.trim() || defaults.name;
+  elements.previewName.textContent = nameValue;
+  elements.folderTitle.textContent = nameValue;
+  elements.relationLinkedName.textContent = nameValue;
+
+  if (!elements.previewEngName.textContent.trim()) {
+    elements.previewEngName.textContent = defaults.engName;
+  }
+  if (!elements.previewSummary.textContent.trim()) {
+    elements.previewSummary.textContent = defaults.summary;
+  }
+  if (!elements.previewKeyword1.textContent.trim()) {
+    elements.previewKeyword1.textContent = defaults.keyword1;
+  }
+  if (!elements.previewKeyword2.textContent.trim()) {
+    elements.previewKeyword2.textContent = defaults.keyword2;
+  }
 }
 
 function syncInputsFromEditable() {
-  const syncedName = elements.previewName.textContent.trim();
-  elements.nameInput.value = syncedName;
+  const syncedName = elements.previewName.textContent.trim() || defaults.name;
+  elements.previewName.textContent = syncedName;
   elements.folderTitle.textContent = syncedName;
   elements.relationLinkedName.textContent = syncedName;
-  elements.engNameInput.value = elements.previewEngName.textContent.trim();
-  elements.summaryInput.value = elements.previewSummary.textContent.trim();
-  elements.keyword1Input.value = elements.previewKeyword1.textContent.trim();
-  elements.keyword2Input.value = elements.previewKeyword2.textContent.trim();
 }
 
 function updateTheme() {
@@ -189,7 +190,6 @@ function bindEditableSync() {
     const syncedName = elements.folderTitle.textContent.trim() || defaults.name;
     elements.previewName.textContent = syncedName;
     elements.relationLinkedName.textContent = syncedName;
-    elements.nameInput.value = syncedName;
   });
 }
 
@@ -272,11 +272,13 @@ function resetAll() {
   elements.relationCharacterColor.value = defaults.relationCharacterColor;
   elements.checkColor.value = defaults.checkColor;
   elements.lineColor.value = defaults.lineColor;
-  elements.nameInput.value = defaults.name;
-  elements.engNameInput.value = defaults.engName;
-  elements.summaryInput.value = defaults.summary;
-  elements.keyword1Input.value = defaults.keyword1;
-  elements.keyword2Input.value = defaults.keyword2;
+  elements.previewName.textContent = defaults.name;
+  elements.folderTitle.textContent = defaults.name;
+  elements.relationLinkedName.textContent = defaults.name;
+  elements.previewEngName.textContent = defaults.engName;
+  elements.previewSummary.textContent = defaults.summary;
+  elements.previewKeyword1.textContent = defaults.keyword1;
+  elements.previewKeyword2.textContent = defaults.keyword2;
   elements.mainImagePosX.value = defaults.mainImagePosX;
   elements.mainImagePosY.value = defaults.mainImagePosY;
   elements.mainImageScale.value = defaults.mainImageScale;
@@ -294,11 +296,6 @@ function resetAll() {
 }
 
 Object.entries({
-  nameInput: 'input',
-  engNameInput: 'input',
-  summaryInput: 'input',
-  keyword1Input: 'input',
-  keyword2Input: 'input',
   mainImagePosX: 'input',
   mainImagePosY: 'input',
   mainImageScale: 'input',
@@ -323,9 +320,6 @@ Object.entries({
   lineColor: 'input'
 }).forEach(([key, eventName]) => {
   elements[key].addEventListener(eventName, () => {
-    if (['nameInput', 'engNameInput', 'summaryInput', 'keyword1Input', 'keyword2Input'].includes(key)) {
-      syncTextInputs();
-    }
     updateTheme();
   });
 });

@@ -218,7 +218,7 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
 .keyword-column {
-  position: absolute; left: 288px; top: 212px;
+  position: absolute; left: 268px; top: 212px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -271,7 +271,8 @@ button.primary { background: #232323; color: #fff; }
   height: 58px;
   border-left: 3px solid var(--line-color);
 }
-.relation-title { font-size: 0.98rem; line-height: 1.38; margin-bottom: 12px; }
+.relation-title { font-size: 1.4rem; line-height: 1.38; margin-bottom: 12px; }
+.relation-linked-name { font-weight: 800; }
 .relation-name { font-weight: 800; margin-bottom: 5px; font-size: 1.02rem; }
 .relation-desc { color: #555; font-size: 0.84rem; line-height: 1.4; }
 .relation-summary-stack {
