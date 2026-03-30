@@ -398,7 +398,7 @@ button.primary { background: #232323; color: #fff; }
   outline: 1px dashed rgba(60,60,60,0.45); outline-offset: 2px; background: #ffffff;
 }
 
-@media (max-width: 1460px) {
+@media (max-width: 900px) {
   .app-shell { grid-template-columns: 1fr; }
   .controls { order: 2; }
   .preview-wrap { order: 1; overflow-x: auto; padding-bottom: 24px; }

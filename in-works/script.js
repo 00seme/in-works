@@ -104,12 +104,24 @@ let marbleImageData = defaults.marbleImage;
 
 function setMode(target, mode, type) {
   const classes = ['texture-mode', 'upload-mode', 'solid-mode', 'none-mode'];
-  target.classList.remove(...classes);
   const classMap = { texture: 'texture-mode', upload: 'upload-mode', solid: 'solid-mode', none: 'none-mode' };
+
+  // upload 모드가 아니면 inline style로 설정된 backgroundImage 초기화
+  if (mode !== 'upload') {
+    target.style.backgroundImage = '';
+    target.style.backgroundSize = '';
+    target.style.backgroundRepeat = '';
+  }
+  target.classList.remove(...classes);
   target.classList.add(classMap[mode]);
 
   if (type === 'marble') {
     marbleTargets.forEach((node) => {
+      if (mode !== 'upload') {
+        node.style.backgroundImage = '';
+        node.style.backgroundSize = '';
+        node.style.backgroundRepeat = '';
+      }
       node.classList.remove(...classes);
       node.classList.add(classMap[mode]);
     });
@@ -406,6 +418,14 @@ elements.brickUpload.addEventListener('change', async () => {
   await handleUpload(elements.brickUpload, (data) => {
     brickImageData = data;
     elements.brickMode.value = 'upload';
+    // CSS var 대신 직접 style 적용 (base64가 길어서 var()가 안 먹히는 브라우저 대응)
+    topBrick.style.backgroundImage = `url('${data}')`;
+    topBrick.style.backgroundSize = `calc(var(--brick-scale) * 100%) auto`;
+    topBrick.style.backgroundRepeat = 'no-repeat';
+    topBrick.style.backgroundPosition = `calc(50% + var(--brick-pos-x)) calc(50% + var(--brick-pos-y))`;
+    const classes = ['texture-mode','upload-mode','solid-mode','none-mode'];
+    topBrick.classList.remove(...classes);
+    topBrick.classList.add('upload-mode');
     updateTheme();
   });
 });
@@ -414,6 +434,16 @@ elements.marbleUpload.addEventListener('change', async () => {
   await handleUpload(elements.marbleUpload, (data) => {
     marbleImageData = data;
     elements.marbleMode.value = 'upload';
+    // 마블(배경B) 모든 타깃에 직접 적용
+    const classes = ['texture-mode','upload-mode','solid-mode','none-mode'];
+    marbleTargets.forEach(node => {
+      node.style.backgroundImage = `url('${data}')`;
+      node.style.backgroundSize = `calc(var(--marble-scale) * 100%) auto`;
+      node.style.backgroundRepeat = 'no-repeat';
+      node.style.backgroundPosition = `calc(50% + var(--marble-pos-x)) calc(50% + var(--marble-pos-y))`;
+      node.classList.remove(...classes);
+      node.classList.add('upload-mode');
+    });
     updateTheme();
   });
 });
