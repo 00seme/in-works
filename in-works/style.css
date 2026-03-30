@@ -289,7 +289,7 @@ button.primary { background: #232323; color: #fff; }
   top: 18px;
   width: 0;
   height: 58px;
-  border-left: 3px solid var(--line-color);
+  border-left: 3px solid var(--relation-character-color);
 }
 .relation-title { font-size: 1.34rem; line-height: 1.28; margin-bottom: 12px; letter-spacing: 0; word-break: keep-all; }
 .relation-linked-name { font-weight: 900; line-height: 1.18; }
