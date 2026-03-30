@@ -111,7 +111,7 @@ button.primary { background: #232323; color: #fff; }
   width: 980px;
   min-height: 1460px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
   padding: 62px 64px 64px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.16);
   background: #ffffff;
@@ -211,6 +211,7 @@ button.primary { background: #232323; color: #fff; }
   border-radius: 18px;
   color: var(--card-text-color);
 }
+.wide-chip { overflow: visible; }
 
 .profile-card {
   position: absolute; right: -29px; top: 52px;
@@ -334,6 +335,7 @@ button.primary { background: #232323; color: #fff; }
 .wide-chip {
   margin-top: -130px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
+  overflow: visible;
 }
 .wide-chip::before {
   content: ''; position: absolute; width: 30px; height: 36px; left: 8px; top: -20px;
