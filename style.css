@@ -218,7 +218,7 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
  .keyword-column {
-  position: absolute; left: 228px; top: 212px;
+  position: absolute; left: 208px; top: 212px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -303,7 +303,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -96px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -78px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
@@ -314,7 +314,7 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .two-col-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 62px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 46px;
 }
 .section-box { position: relative; padding: 40px 34px 30px; min-height: 232px; }
 .section-title {
@@ -323,12 +323,12 @@ button.primary { background: #232323; color: #fff; }
 }
 .checklist { display: grid; gap: 18px 28px; padding-top: 24px; }
 .two-col-list { grid-template-columns: 1fr 1fr; }
-.check-item { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: start; min-width: 0; }
+.check-item { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: center; min-width: 0; }
 .check-toggle {
-  width: 16px; height: 16px; margin-top: 4px; border: 1px solid var(--line-color); border-radius: 50%; background: #ffffff; padding: 0; transition: background-color 120ms ease;
+  width: 16px; height: 16px; margin-top: 0; border: 1px solid var(--line-color); border-radius: 50%; background: #ffffff; padding: 0; transition: background-color 120ms ease;
 }
 .check-item.checked .check-toggle { background: var(--check-color); border-color: var(--line-color); box-shadow: none; }
-.check-text { min-width: 0; line-height: 1.6; white-space: nowrap; font-size: 0.87rem; }
+.check-text { min-width: 0; line-height: 1.4; white-space: nowrap; font-size: 0.87rem; }
 .full-width { margin-top: 54px; }
 .episode-box { min-height: 248px; }
 .episode-grid {
