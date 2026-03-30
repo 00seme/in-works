@@ -403,6 +403,55 @@ bindEditableSync();
 syncTextInputs();
 updateTheme();
 
+// ── 메인 프로필 직접 드래그 & 스크롤 조작 ──────────────────────
+(function initPortraitDrag() {
+  const portrait = document.querySelector('.main-portrait');
+  let dragging = false;
+  let startX = 0, startY = 0;
+  let basePosX = 0, basePosY = 0;
+
+  function getPosX() { return Number(elements.mainImagePosX.value); }
+  function getPosY() { return Number(elements.mainImagePosY.value); }
+
+  portrait.addEventListener('mousedown', (e) => {
+    if (!portrait.classList.contains('has-image')) return;
+    dragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    basePosX = getPosX();
+    basePosY = getPosY();
+    portrait.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const newX = Math.max(-200, Math.min(200, basePosX + dx));
+    const newY = Math.max(-200, Math.min(200, basePosY + dy));
+    elements.mainImagePosX.value = newX;
+    elements.mainImagePosY.value = newY;
+    updateTheme();
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (dragging) {
+      dragging = false;
+      portrait.classList.remove('dragging');
+    }
+  });
+
+  portrait.addEventListener('wheel', (e) => {
+    if (!portrait.classList.contains('has-image')) return;
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 5 : -5;
+    const current = Number(elements.mainImageScale.value);
+    elements.mainImageScale.value = Math.max(50, Math.min(180, current + delta));
+    updateTheme();
+  }, { passive: false });
+}());
+
 
 document.querySelectorAll('.control-section').forEach((section) => {
   const toggleLabel = section.querySelector('.section-toggle');

@@ -34,22 +34,22 @@ button, input, select, textarea { font: inherit; }
 
 .app-shell {
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 20px;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
   min-height: 100vh;
-  padding: 20px;
+  padding: 16px;
 }
-.controls { display: flex; flex-direction: column; gap: 16px; }
+.controls { display: flex; flex-direction: column; gap: 10px; }
 .control-card {
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 18px;
-  padding: 16px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
-.control-card h1, .control-card h2 { margin: 0 0 10px; font-weight: 900; }
-.control-card h1 { font-size: 1.45rem; }
-.control-card h2 { font-size: 1rem; }
+.control-card h1, .control-card h2 { margin: 0 0 8px; font-weight: 900; }
+.control-card h1 { font-size: 1.1rem; }
+.control-card h2 { font-size: 0.88rem; }
 .control-section summary {
   display: flex;
   align-items: center;
@@ -74,21 +74,21 @@ button, input, select, textarea { font: inherit; }
 
 label {
   display: block;
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   font-weight: 900;
-  margin: 10px 0 0;
+  margin: 7px 0 0;
 }
 label input, label select, label textarea {
-  display: block; width: 100%; margin-top: 6px; border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.16); padding: 10px 12px; background: #fff;
+  display: block; width: 100%; margin-top: 4px; border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.16); padding: 6px 10px; background: #fff;
 }
-label input[type="color"] { padding: 4px; height: 42px; }
+label input[type="color"] { padding: 3px; height: 32px; }
 label input[type="range"] { padding: 0; }
-.button-row { display: flex; gap: 10px; margin-top: 12px; }
+.button-row { display: flex; gap: 6px; margin-top: 8px; }
 .button-row.two-up > * { flex: 1; }
 button {
   border: 1px solid rgba(0,0,0,0.12);
-  background: #f5f5f5; color: #222; padding: 10px 14px; border-radius: 12px; cursor: pointer;
+  background: #f5f5f5; color: #222; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
 }
 button.primary { background: #232323; color: #fff; }
 .muted { color: #666; }
@@ -124,7 +124,6 @@ button.primary { background: #232323; color: #fff; }
   z-index: 1;
   background-color: var(--marble-solid-color);
   border-top-left-radius: 350px;
-  overflow: hidden;
 }
 
 .brick-bg.texture-mode {
@@ -230,7 +229,18 @@ button.primary { background: #232323; color: #fff; }
 .main-portrait, .relation-portrait {
   position: relative; overflow: hidden; border: 1px solid var(--line-color);
 }
-.main-portrait { width: 220px; height: 220px; border-radius: 50%; }
+.main-portrait { width: 220px; height: 220px; border-radius: 50%; cursor: grab; user-select: none; }
+.main-portrait.dragging { cursor: grabbing; }
+.portrait-controls-hint {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #999;
+  white-space: nowrap;
+  pointer-events: none;
+}
 .relation-portrait { width: 118px; height: 118px; border-radius: 50%; justify-self: center; background: var(--relation-character-color); }
 .main-portrait img { transform: translate(var(--main-image-pos-x), var(--main-image-pos-y)); }
 
@@ -301,7 +311,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -158px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -240px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
