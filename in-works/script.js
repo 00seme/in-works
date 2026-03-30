@@ -176,7 +176,8 @@ function syncTextInputs() {
   }
 }
 
-function updateTheme() {
+// 가벼운 함수: 색상·위치·크기 CSS var만 업데이트 (이미지 데이터 제외)
+function updateColors() {
   root.style.setProperty('--brick-color', elements.brickColor.value);
   root.style.setProperty('--brick-solid-color', elements.brickSolidColor.value);
   root.style.setProperty('--brick-blend-alpha', String(Number(elements.brickBlend.value) / 100));
@@ -205,6 +206,11 @@ function updateTheme() {
   root.style.setProperty('--sub-image-pos-x', `${elements.subImagePosX.value}px`);
   root.style.setProperty('--sub-image-pos-y', `${elements.subImagePosY.value}px`);
   root.style.setProperty('--sub-image-scale', String(Number(elements.subImageScale.value) / 100));
+}
+
+// 무거운 함수: 이미지 데이터 + 모드 변경 포함 (업로드·모드 변경 시만 호출)
+function updateTheme() {
+  updateColors();
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
@@ -369,42 +375,22 @@ function resetAll() {
   updateTheme();
 }
 
-Object.entries({
-  mainImagePosX: 'input',
-  mainImagePosY: 'input',
-  mainImageScale: 'input',
-  brickMode: 'change',
-  marbleMode: 'change',
-  brickColor: 'input',
-  brickSolidColor: 'input',
-  brickPosX: 'input',
-  brickPosY: 'input',
-  brickBlend: 'input',
-  marbleColor: 'input',
-  marbleSolidColor: 'input',
-  marblePosX: 'input',
-  marblePosY: 'input',
-  marbleBlend: 'input',
-  pinColor: 'input',
-  markerColor: 'input',
-  pillColor: 'input',
-  pillTextColor: 'input',
-  relationCharacterColor: 'input',
-  checkColor: 'input',
-  lineColor: 'input',
-  paperColor: 'input',
-  cardTextColor: 'input',
-  sheetTextColor: 'input',
-  brickScale: 'input',
-  marbleScale: 'input',
-  subImagePosX: 'input',
-  subImagePosY: 'input',
-  subImageScale: 'input'
-}).forEach(([key, eventName]) => {
-  elements[key].addEventListener(eventName, () => {
-    updateTheme();
-  });
+// 색상·위치 → updateColors() (이미지 데이터 재설정 없이 빠름)
+['mainImagePosX','mainImagePosY','mainImageScale',
+ 'brickColor','brickSolidColor','brickPosX','brickPosY','brickBlend',
+ 'marbleColor','marbleSolidColor','marblePosX','marblePosY','marbleBlend',
+ 'pinColor','markerColor','pillColor','pillTextColor',
+ 'relationCharacterColor','checkColor','lineColor',
+ 'paperColor','cardTextColor','sheetTextColor',
+ 'brickScale','marbleScale',
+ 'subImagePosX','subImagePosY','subImageScale',
+].forEach(key => {
+  elements[key].addEventListener('input', updateColors);
 });
+
+// 모드 변경 → updateTheme() (setMode 포함)
+elements.brickMode.addEventListener('change', updateTheme);
+elements.marbleMode.addEventListener('change', updateTheme);
 
 elements.mainImageInput.addEventListener('change', async () => {
   await handleUpload(elements.mainImageInput, (data) => updateImage(elements.mainPortrait, data));
@@ -497,7 +483,7 @@ updateTheme();
     const newY = Math.max(-200, Math.min(200, basePosY + dy));
     elements.mainImagePosX.value = newX;
     elements.mainImagePosY.value = newY;
-    updateTheme();
+    updateColors();
   });
 
   window.addEventListener('mouseup', () => {
