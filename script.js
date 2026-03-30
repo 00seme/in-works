@@ -101,30 +101,34 @@ function setMode(target, mode, type) {
 }
 
 let isSyncingName = false;
+let isComposingName = false;
 
 function getCleanName(node) {
-  return node.textContent.replace(/
-+/g, ' ').trim();
+  return (node.textContent || '').replace(/\s+/g, ' ').trim();
 }
 
 function syncNameFrom(sourceNode, { applyDefault = false } = {}) {
-  if (isSyncingName) return;
+  if (isSyncingName || isComposingName) return;
 
   const typedName = getCleanName(sourceNode);
   const syncedName = typedName || (applyDefault ? defaults.name : '');
   if (!syncedName) return;
 
   isSyncingName = true;
-  [elements.previewName, elements.folderTitle, elements.relationLinkedName].forEach((node) => {
-    if (node !== sourceNode && node.textContent !== syncedName) {
-      node.textContent = syncedName;
-    }
-  });
+  try {
+    [elements.previewName, elements.folderTitle, elements.relationLinkedName].forEach((node) => {
+      if (node === sourceNode) return;
+      if (node.textContent !== syncedName) {
+        node.textContent = syncedName;
+      }
+    });
 
-  if (applyDefault && sourceNode.textContent !== syncedName) {
-    sourceNode.textContent = syncedName;
+    if (applyDefault && sourceNode.textContent !== syncedName) {
+      sourceNode.textContent = syncedName;
+    }
+  } finally {
+    isSyncingName = false;
   }
-  isSyncingName = false;
 }
 
 function syncTextInputs() {
@@ -200,8 +204,23 @@ async function handleUpload(input, callback) {
 
 function bindEditableSync() {
   [elements.previewName, elements.folderTitle, elements.relationLinkedName].forEach((node) => {
-    node.addEventListener('input', () => syncNameFrom(node));
-    node.addEventListener('blur', () => syncNameFrom(node, { applyDefault: true }));
+    node.addEventListener('compositionstart', () => {
+      isComposingName = true;
+    });
+
+    node.addEventListener('compositionend', () => {
+      isComposingName = false;
+      syncNameFrom(node);
+    });
+
+    node.addEventListener('input', () => {
+      if (isComposingName) return;
+      syncNameFrom(node);
+    });
+
+    node.addEventListener('blur', () => {
+      syncNameFrom(node, { applyDefault: true });
+    });
   });
 
   [elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {

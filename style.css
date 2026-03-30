@@ -303,7 +303,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -118px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -133px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
@@ -314,7 +314,7 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .two-col-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 46px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 31px;
 }
 .section-box { position: relative; padding: 40px 34px 30px; min-height: 232px; }
 .section-title {
