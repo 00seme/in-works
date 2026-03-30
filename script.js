@@ -102,18 +102,33 @@ function setMode(target, mode, type) {
 
 let isSyncingName = false;
 
-function syncNameFrom(sourceNode) {
+function getCleanName(node) {
+  return node.textContent.replace(/
++/g, ' ').trim();
+}
+
+function syncNameFrom(sourceNode, { applyDefault = false } = {}) {
   if (isSyncingName) return;
+
+  const typedName = getCleanName(sourceNode);
+  const syncedName = typedName || (applyDefault ? defaults.name : '');
+  if (!syncedName) return;
+
   isSyncingName = true;
-  const syncedName = sourceNode.textContent.trim() || defaults.name;
-  elements.previewName.textContent = syncedName;
-  elements.folderTitle.textContent = syncedName;
-  elements.relationLinkedName.textContent = syncedName;
+  [elements.previewName, elements.folderTitle, elements.relationLinkedName].forEach((node) => {
+    if (node !== sourceNode && node.textContent !== syncedName) {
+      node.textContent = syncedName;
+    }
+  });
+
+  if (applyDefault && sourceNode.textContent !== syncedName) {
+    sourceNode.textContent = syncedName;
+  }
   isSyncingName = false;
 }
 
 function syncTextInputs() {
-  syncNameFrom(elements.previewName);
+  syncNameFrom(elements.previewName, { applyDefault: true });
 
   if (!elements.previewEngName.textContent.trim()) {
     elements.previewEngName.textContent = defaults.engName;
@@ -186,7 +201,7 @@ async function handleUpload(input, callback) {
 function bindEditableSync() {
   [elements.previewName, elements.folderTitle, elements.relationLinkedName].forEach((node) => {
     node.addEventListener('input', () => syncNameFrom(node));
-    node.addEventListener('blur', syncTextInputs);
+    node.addEventListener('blur', () => syncNameFrom(node, { applyDefault: true }));
   });
 
   [elements.previewEngName, elements.previewSummary, elements.previewKeyword1, elements.previewKeyword2].forEach((node) => {
