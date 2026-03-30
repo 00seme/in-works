@@ -185,7 +185,7 @@ button.primary { background: #232323; color: #fff; }
 .marble-bg.solid-mode, .marble-bg-sub.solid-mode { background-image: none; background-color: var(--marble-solid-color); }
 .marble-bg.none-mode, .marble-bg-sub.none-mode { background: transparent; }
 
-.top-stack, .wide-chip, .two-col-grid, .episode-box, .bottom-grid { position: relative; z-index: 2; }
+.top-stack, .two-col-grid, .episode-box, .bottom-grid { position: relative; z-index: 2; }
 .top-stack { position: relative; height: 740px; }
 .top-icons {
   position: absolute; left: 112px; top: 104px;
@@ -333,15 +333,9 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -130px; min-height: 48px; display: flex; align-items: center; justify-content: center;
-  padding: 14px 32px 14px 52px; text-align: center;
+  min-height: 48px; display: flex; align-items: center; justify-content: center;
+  padding: 14px 32px 14px 32px; text-align: center;
   overflow: visible;
-}
-.wide-chip::before {
-  content: ''; position: absolute; width: 30px; height: 36px; left: 8px; top: -20px;
-  background: var(--pin-color);
-  mask-image: url('./assets/pin.png'); -webkit-mask-image: url('./assets/pin.png');
-  mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat; mask-size: contain; -webkit-mask-size: contain;
 }
 
 .two-col-grid {
@@ -536,3 +530,26 @@ button.primary:hover { background: #4a3de0; }
 .preview-wrap { background: transparent; }
 .preview-toolbar { margin-bottom: 8px; }
 .preview-toolbar span:first-child { color: #333; font-weight: 700; font-size: 0.85rem; }
+
+.wide-chip-wrap {
+  position: relative;
+  margin-top: -152px;
+  padding-top: 22px;
+  z-index: 3;
+  overflow: visible;
+}
+.wide-chip {
+  margin-top: 0;
+}
+.pin-icon {
+  position: absolute;
+  width: 30px; height: 36px;
+  left: 8px; top: 4px;
+  z-index: 10;
+  background: var(--pin-color);
+  mask-image: url('./assets/pin.png');
+  -webkit-mask-image: url('./assets/pin.png');
+  mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat;
+  mask-size: contain; -webkit-mask-size: contain;
+  mask-position: center; -webkit-mask-position: center;
+}
