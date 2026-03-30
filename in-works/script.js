@@ -172,7 +172,7 @@ function updateTheme() {
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
-  setMode(sheet, elements.marbleMode.value, 'marble');
+  setMode(marbleSurface, elements.marbleMode.value, 'marble');
 }
 
 function updateImage(imgEl, fileData) {

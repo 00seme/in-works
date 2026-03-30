@@ -120,10 +120,7 @@ button.primary { background: #232323; color: #fff; }
 }
 .sheet-curve {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 520px;
-  height: 520px;
+  inset: 0;
   z-index: 1;
   background-color: var(--marble-solid-color);
   border-top-left-radius: 350px;
@@ -304,7 +301,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -138px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -158px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
