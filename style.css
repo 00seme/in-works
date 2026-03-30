@@ -120,13 +120,14 @@ button.primary { background: #232323; color: #fff; }
 }
 .sheet-curve {
   position: absolute;
-  left: -13px;
-  top: -66px;
-  width: 1396px;
-  height: 1396px;
+  left: 0;
+  top: 0;
+  width: 520px;
+  height: 520px;
   z-index: 1;
   background-color: var(--marble-solid-color);
-  border-radius: 50%;
+  border-radius: 48px 0 0 0;
+  overflow: hidden;
 }
 
 .brick-bg.texture-mode {
@@ -218,7 +219,7 @@ button.primary { background: #232323; color: #fff; }
   color: #555; white-space: pre-wrap; line-height: 1.55;
 }
  .keyword-column {
-  position: absolute; left: 198px; top: 212px;
+  position: absolute; left: 208px; top: 212px;
   display: flex; flex-direction: column; gap: 8px;
   z-index: 4;
 }
@@ -228,7 +229,7 @@ button.primary { background: #232323; color: #fff; }
   width: 118px; min-height: 30px; padding: 4px 12px; border-radius: 10px;
   font-size: 0.92rem; font-weight: 700;
 }
-.main-portrait-frame { position: absolute; right: 42px; top: 58px; }
+.main-portrait-frame { position: absolute; right: 42px; top: 38px; }
 .main-portrait, .relation-portrait {
   position: relative; overflow: hidden; border: 1px solid var(--line-color);
 }
@@ -303,7 +304,7 @@ button.primary { background: #232323; color: #fff; }
 .has-image .placeholder-text { display: none; }
 
 .wide-chip {
-  margin-top: -133px; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  margin-top: -78px; min-height: 48px; display: flex; align-items: center; justify-content: center;
   padding: 14px 32px 14px 52px; text-align: center;
 }
 .wide-chip::before {
@@ -314,14 +315,14 @@ button.primary { background: #232323; color: #fff; }
 }
 
 .two-col-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 31px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 46px;
 }
 .section-box { position: relative; padding: 40px 34px 30px; min-height: 232px; }
 .section-title {
   position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
   border-radius: 999px; padding: 8px 28px; font-weight: 800; min-width: 156px; text-align: center;
 }
-.checklist { display: grid; gap: 18px 28px; padding-top: 14px; }
+.checklist { display: grid; gap: 18px 28px; padding-top: 24px; }
 .two-col-list { grid-template-columns: 1fr 1fr; }
 .check-item { display: grid; grid-template-columns: 16px 1fr; gap: 8px; align-items: center; min-width: 0; }
 .check-toggle {
