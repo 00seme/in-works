@@ -28,6 +28,14 @@ const defaults = {
   mainImagePosX: 0,
   mainImagePosY: 0,
   mainImageScale: 100,
+  brickScale: 100,
+  marbleScale: 100,
+  subImagePosX: 0,
+  subImagePosY: 0,
+  subImageScale: 100,
+  paperColor: '#ffffff',
+  cardTextColor: '#202020',
+  sheetTextColor: '#202020',
   brickImage: './assets/brick-default.png',
   marbleImage: './assets/marble-default.png',
   checklists: {
@@ -69,6 +77,11 @@ const elements = {
   mainImagePosX: document.getElementById('mainImagePosX'),
   mainImagePosY: document.getElementById('mainImagePosY'),
   mainImageScale: document.getElementById('mainImageScale'),
+  brickScale: document.getElementById('brickScale'),
+  marbleScale: document.getElementById('marbleScale'),
+  subImagePosX: document.getElementById('subImagePosX'),
+  subImagePosY: document.getElementById('subImagePosY'),
+  subImageScale: document.getElementById('subImageScale'),
   subImageInput: document.getElementById('subImageInput'),
   previewName: document.getElementById('previewName'),
   folderTitle: document.getElementById('folderTitle'),
@@ -79,6 +92,9 @@ const elements = {
   relationLinkedName: document.getElementById('relationLinkedName'),
   mainPortrait: document.getElementById('mainPortrait'),
   subPortrait: document.getElementById('subPortrait'),
+  paperColor: document.getElementById('paperColor'),
+  cardTextColor: document.getElementById('cardTextColor'),
+  sheetTextColor: document.getElementById('sheetTextColor'),
   downloadPngBtn: document.getElementById('downloadPngBtn'),
   resetBtn: document.getElementById('resetBtn')
 };
@@ -166,9 +182,17 @@ function updateTheme() {
   root.style.setProperty('--relation-character-color', elements.relationCharacterColor.value);
   root.style.setProperty('--check-color', elements.checkColor.value);
   root.style.setProperty('--line-color', elements.lineColor.value);
+  root.style.setProperty('--paper-color', elements.paperColor.value);
+  root.style.setProperty('--card-text-color', elements.cardTextColor.value);
+  root.style.setProperty('--sheet-text-color', elements.sheetTextColor.value);
   root.style.setProperty('--main-image-pos-x', `${elements.mainImagePosX.value}px`);
   root.style.setProperty('--main-image-pos-y', `${elements.mainImagePosY.value}px`);
   root.style.setProperty('--main-image-scale', String(Number(elements.mainImageScale.value) / 100));
+  root.style.setProperty('--brick-scale', String(Number(elements.brickScale.value) / 100));
+  root.style.setProperty('--marble-scale', String(Number(elements.marbleScale.value) / 100));
+  root.style.setProperty('--sub-image-pos-x', `${elements.subImagePosX.value}px`);
+  root.style.setProperty('--sub-image-pos-y', `${elements.subImagePosY.value}px`);
+  root.style.setProperty('--sub-image-scale', String(Number(elements.subImageScale.value) / 100));
   root.style.setProperty('--brick-image', `url('${brickImageData}')`);
   root.style.setProperty('--marble-image', `url('${marbleImageData}')`);
   setMode(topBrick, elements.brickMode.value, 'brick');
@@ -257,23 +281,17 @@ function buildAllChecklists() {
 }
 
 async function downloadPng() {
-  const originalBoxShadow = sheet.style.boxShadow;
-  sheet.style.boxShadow = 'none';
+  const btn = elements.downloadPngBtn;
+  btn.disabled = true;
+  btn.textContent = '저장 중...';
   try {
-    const EXPORT_WIDTH = 1000;
-    const EXPORT_HEIGHT = 1833;
     const dataUrl = await toPng(sheet, {
       cacheBust: true,
-      pixelRatio: 1,
+      pixelRatio: 2,
       skipFonts: false,
-      canvasWidth: EXPORT_WIDTH,
-      canvasHeight: EXPORT_HEIGHT,
-      width: sheet.scrollWidth,
+      width: 980,
       height: sheet.scrollHeight,
-      style: {
-        transform: 'scale(1)',
-        transformOrigin: 'top left'
-      }
+      style: { boxShadow: 'none' }
     });
     const link = document.createElement('a');
     link.href = dataUrl;
@@ -281,9 +299,10 @@ async function downloadPng() {
     link.click();
   } catch (error) {
     console.error(error);
-    alert('PNG 저장에 실패했습니다. 이미지가 너무 크거나 브라우저 메모리가 부족할 수 있습니다.');
+    alert('PNG 저장에 실패했습니다.');
   } finally {
-    sheet.style.boxShadow = originalBoxShadow;
+    btn.disabled = false;
+    btn.textContent = 'PNG 저장';
   }
 }
 
@@ -307,6 +326,9 @@ function resetAll() {
   elements.relationCharacterColor.value = defaults.relationCharacterColor;
   elements.checkColor.value = defaults.checkColor;
   elements.lineColor.value = defaults.lineColor;
+  elements.paperColor.value = defaults.paperColor;
+  elements.cardTextColor.value = defaults.cardTextColor;
+  elements.sheetTextColor.value = defaults.sheetTextColor;
   elements.previewName.textContent = defaults.name;
   elements.folderTitle.textContent = defaults.name;
   elements.relationLinkedName.textContent = defaults.name;
@@ -315,6 +337,11 @@ function resetAll() {
   elements.previewKeyword1.textContent = defaults.keyword1;
   elements.previewKeyword2.textContent = defaults.keyword2;
   elements.mainImagePosX.value = defaults.mainImagePosX;
+  elements.brickScale.value = defaults.brickScale;
+  elements.marbleScale.value = defaults.marbleScale;
+  elements.subImagePosX.value = defaults.subImagePosX;
+  elements.subImagePosY.value = defaults.subImagePosY;
+  elements.subImageScale.value = defaults.subImageScale;
   elements.mainImagePosY.value = defaults.mainImagePosY;
   elements.mainImageScale.value = defaults.mainImageScale;
   brickImageData = defaults.brickImage;
@@ -352,7 +379,15 @@ Object.entries({
   pillTextColor: 'input',
   relationCharacterColor: 'input',
   checkColor: 'input',
-  lineColor: 'input'
+  lineColor: 'input',
+  paperColor: 'input',
+  cardTextColor: 'input',
+  sheetTextColor: 'input',
+  brickScale: 'input',
+  marbleScale: 'input',
+  subImagePosX: 'input',
+  subImagePosY: 'input',
+  subImageScale: 'input'
 }).forEach(([key, eventName]) => {
   elements[key].addEventListener(eventName, () => {
     updateTheme();
@@ -462,3 +497,5 @@ document.querySelectorAll('.control-section').forEach((section) => {
   section.addEventListener('toggle', refresh);
   refresh();
 });
+
+    

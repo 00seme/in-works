@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="app-shell">
+<div class="app-shell">
       <aside class="controls">
         <div class="control-card">
           <h1>[IN 작품 메이커]</h1>
@@ -36,6 +36,15 @@
           </label>
           <label>관계 인물 이미지
             <input type="file" id="subImageInput" accept="image/*" />
+          </label>
+          <label>관계 인물 가로 이동
+            <input type="range" id="subImagePosX" min="-100" max="100" value="0" />
+          </label>
+          <label>관계 인물 세로 이동
+            <input type="range" id="subImagePosY" min="-100" max="100" value="0" />
+          </label>
+          <label>관계 인물 확대/축소
+            <input type="range" id="subImageScale" min="50" max="200" value="100" />
           </label>
           <div class="button-row two-up">
             <button data-clear-image="main">메인 이미지 삭제</button>
@@ -71,6 +80,9 @@
           <label>블렌드 강도
             <input type="range" id="brickBlend" min="0" max="100" value="0" />
           </label>
+          <label>배경A 확대/축소 (Shift+스크롤)
+            <input type="range" id="brickScale" min="20" max="300" value="100" />
+          </label>
         </details>
 
         <details class="control-card control-section">
@@ -101,6 +113,9 @@
           <label>블렌드 강도
             <input type="range" id="marbleBlend" min="0" max="100" value="0" />
           </label>
+          <label>배경B 확대/축소 (Shift+스크롤)
+            <input type="range" id="marbleScale" min="20" max="300" value="100" />
+          </label>
         </details>
 
         <details class="control-card control-section">
@@ -126,18 +141,24 @@
           <label>체크 색상
             <input type="color" id="checkColor" value="#555555" />
           </label>
+          <label>카드 배경색
+            <input type="color" id="paperColor" value="#ffffff" />
+          </label>
+          <label>카드 글자색
+            <input type="color" id="cardTextColor" value="#202020" />
+          </label>
+          <label>시트 글자색
+            <input type="color" id="sheetTextColor" value="#202020" />
+          </label>
         </details>
 
         
       </aside>
 
       <main class="preview-wrap">
-        <div class="preview-toolbar">
-          <span>미리보기</span>
-          <span class="muted small">라벨 제목·체크 항목·내용 모두 직접 수정 가능</span>
-        </div>
+        <div class="preview-toolbar"></div>
 
-        <div id="sheet" class="sheet">
+        <div class="sheet-scaler"><div id="sheet" class="sheet">
           <div class="top-brick brick-bg"></div>
           <div class="sheet-curve marble-bg"></div>
 
@@ -167,7 +188,6 @@
                   <img id="mainPortrait" alt="메인 프로필" />
                   <div class="placeholder-text">프로필 이미지</div>
                 </div>
-                <div class="portrait-controls-hint">드래그·스크롤로 조절</div>
               </div>
             </section>
 
@@ -244,7 +264,6 @@
         </div>
       </main>
     </div>
-
     <script type="module" src="script.js"></script>
   </body>
 </html>
