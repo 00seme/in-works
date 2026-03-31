@@ -44,7 +44,7 @@ input[type=file]{display:none}
 .cn{font-family:"Pretendard",sans-serif;font-weight:700;font-size:22px;color:var(--td);line-height:1;cursor:text}
 .lb .cn{text-align:right}.rb .cn{text-align:left}
 
-.cc3{font-family:"Pretendard",sans-serif;font-weight:300;font-size:10px;color:var(--tm);letter-spacing:.1em;cursor:text;margin-bottom:9px}
+.cc3{font-family:"Pretendard",sans-serif;font-weight:300;font-size:10px;color:var(--tm);letter-spacing:.1em;cursor:text;margin-top:6px;margin-bottom:9px}
 .lb .cc3{text-align:right}.rb .cc3{text-align:left}
 
 .dwl{border-left:3px solid var(--colA);padding-left:9px;width:100%}
@@ -80,7 +80,7 @@ input[type=file]{display:none}
   border:1px solid rgba(255,255,255,.8);
   border-radius:14px;
   box-shadow:0 3px 18px rgba(160,145,125,.16),inset 0 1px 0 rgba(255,255,255,.95);
-  position:relative;padding:18px 8px 20px;min-height:155px;
+  position:relative;padding:10px 8px 12px;min-height:180px;
   display:flex;align-items:flex-end;justify-content:center;
 }
 
@@ -89,13 +89,13 @@ input[type=file]{display:none}
 .tn{font-family:"IM Fell English",serif;font-style:italic;font-size:12px;color:var(--tm);cursor:text;min-width:16px}
 
 /* ── 실루엣 ── */
-.sc{display:flex;align-items:flex-end;justify-content:center;width:100%;min-height:128px}
+.sc{display:flex;align-items:flex-end;justify-content:center;width:100%;min-height:160px}
 .ss{position:relative;display:flex;align-items:flex-end;justify-content:center;cursor:pointer;transition:opacity .15s}
 .ss:hover{opacity:.7}
 .ss:nth-child(2){margin-left:-16px}
 .sv{display:block;width:70px;height:114px;flex-shrink:0;color:#8a857e}
 .ss:nth-child(2) .sv{color:#b0aba5}
-.ss img.up{display:block;max-height:180px;max-width:110px;object-fit:contain;width:100%;height:100%}
+.ss img.up{display:block;max-height:220px;max-width:140px;object-fit:contain;width:100%;height:100%}
 .ss .sh{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-size:7px;color:#aaa;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none}
 .ss:hover .sh{opacity:1}
 
@@ -124,7 +124,8 @@ input[type=file]{display:none}
     <button class="btn bg2" onclick="clearBg()" style="font-size:10px">제거</button>
     <input type="file" id="bgfi" accept="image/*" onchange="setBgImage(this)">
   </div>
-  <div class="cg"><label>배경색</label><input type="color" value="#e8e5e0" oninput="document.getElementById('sheet').style.backgroundColor=this.value"></div>
+  <div class="cg"><label>배경 단색</label><input type="color" id="solidBgCol" value="#e8e5e0" oninput="setSolidBg(this.value)"></div>
+  <button class="btn bg2" onclick="setSolidBg(document.getElementById('solidBgCol').value)" style="font-size:10px">단색 적용</button>
   <div class="cg"><label>카드색</label><input type="color" id="cardCol" value="#ffffff" oninput="updateCardColor(this.value)"></div>
   <div class="cg"><label>A 컬러</label><input type="color" id="picA" value="#c4ae74" oninput="updateCharColor('A',this.value)"></div>
   <div class="cg"><label>B 컬러</label><input type="color" id="picB" value="#80a8bc" oninput="updateCharColor('B',this.value)"></div>
@@ -155,6 +156,11 @@ input[type=file]{display:none}
     <div class="ft" contenteditable="true" spellcheck="false">from 페어명</div>
   </div>
   <div id="cg"></div>
+  <div id="sheet-footer" style="position:relative;z-index:2;display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:28px;padding-top:10px;border-top:1px solid rgba(90,82,72,0.15);">
+    <span style="font-family:'IM Fell English',serif;font-style:italic;font-size:11px;color:var(--tl);user-select:none;">@0_Z3ROo 제작</span>
+    <span style="font-family:'IM Fell English',serif;font-style:italic;font-size:11px;color:var(--tl);">|</span>
+    <span style="font-family:'IM Fell English',serif;font-style:italic;font-size:11px;color:var(--tm);cursor:text;" contenteditable="true" spellcheck="false">커미션주</span>
+  </div>
 </div></div>
 
 <svg style="display:none">
@@ -189,7 +195,17 @@ function delCard(btn){btn.closest(".cc2").remove();}
 
 function triggerUpload(el){
   const fi=document.getElementById("fi");fi.value="";
-  fi.onchange=e=>{const f=e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);let img=el.querySelector("img");if(!img){img=document.createElement("img");el.appendChild(img);}img.src=u;const bs=el.style.boxShadow||window.getComputedStyle(el).boxShadow;el.style.boxShadow=bs.includes('inset')?bs:'inset 0 0 0 3px #fff';};
+  fi.onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const u=URL.createObjectURL(f);
+    let img=el.querySelector("img");
+    if(!img){img=document.createElement("img");el.appendChild(img);}
+    img.src=u;
+    // 흰색 선(inset box-shadow) 강제 유지
+    const borderColor=window.getComputedStyle(el).borderColor;
+    el.style.boxShadow="inset 0 0 0 3px #fff";
+    el.style.borderColor=borderColor;
+  };
   fi.click();
 }
 function triggerSlot(el){
@@ -198,6 +214,13 @@ function triggerSlot(el){
   fi.click();
 }
 
+function setSolidBg(hex){
+  const s=document.getElementById("sheet");
+  const bgImg=document.getElementById("sheet-bg-img");
+  bgImg.src="";
+  s.style.backgroundColor=hex;
+  s.dataset.bgData="";
+}
 function setBgImage(input){
   const f=input.files[0];if(!f)return;
   const reader=new FileReader();
@@ -235,10 +258,19 @@ async function exportPNG(){
   const sheet=document.getElementById("sheet");
   const bgImg=document.getElementById("sheet-bg-img");
   const origSrc=bgImg.src;
+  const origRadius=sheet.style.borderRadius;
+  sheet.style.borderRadius="0";
+  const bgImgEl=document.getElementById("sheet-bg-img");
+  if(bgImgEl)bgImgEl.style.borderRadius="0";
+  const gradEl=document.getElementById("sheet-grad-overlay");
+  if(gradEl)gradEl.style.borderRadius="0";
   try{
     const cv=await html2canvas(sheet,{scale:2,useCORS:true,allowTaint:true,backgroundColor:null,logging:false,imageTimeout:20000});
     const a=document.createElement("a");a.download="whats-in-my-closet.png";a.href=cv.toDataURL("image/png");a.click();
   }catch(e){alert("저장 오류: "+e.message);}
+  sheet.style.borderRadius=origRadius;
+  if(bgImgEl)bgImgEl.style.borderRadius="10px";
+  if(gradEl)gradEl.style.borderRadius="10px 10px 0 0";
   bgImg.src=origSrc;
   ctrl.style.display="flex";if(ab)ab.style.display="flex";ov.style.display="none";
 }
